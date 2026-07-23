@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Online Favicon Generator & Converter | AWDEV Tools</title>
+  <title>Free Online Favicon & Logo Generator | AWDEV Tools</title>
 
   <!-- Canonical & Base Target -->
   <link rel="canonical" href="https://awdev.eu.org/tools/favicon-generator">
   
   <!-- SEO & Verification Tags -->
   <meta name="robots" content="index, follow">
-  <meta name="description" content="Generate custom favicons from text, emojis, or uploaded images instantly. Download ICO, PNG, and ready-to-use HTML meta tags for your website.">
+  <meta name="description" content="Generate custom 3D favicons and logo typography from text, emojis, or industry presets instantly. Download high-res PNG, SVG, and copy HTML meta tags.">
   <meta name="google-site-verification" content="ApJ2vxUeLQdmpTqLVx21AfHuUJMtK6DU3GpuaoFLtuk">
   <meta name="google-site-verification" content="gbPa2MRABFiJSWv4hIj24aNn2MTRfi7W96fncHPziHI">
   <meta name="google-adsense-account" content="ca-pub-5407249785989200">
@@ -34,216 +34,428 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5407249785989200" crossorigin="anonymous"></script>
   <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
 
-  <!-- Modern Layout CSS -->
   <style>
     :root {
-      --primary-color: #0d6efd;
-      --bg-dark: #0f172a;
+      --rainbow-gradient: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --gold: #d4af37;
       --card-bg: #1e293b;
-      --text-light: #f8fafc;
-      --text-muted: #94a3b8;
       --border-color: #334155;
+      --text-muted: #94a3b8;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; padding: 20px; }
-    
-    .container { max-width: 1000px; margin: 0 auto; }
-    
-    header { text-align: center; margin-bottom: 30px; }
-    header h1 { font-size: 2.2rem; margin-bottom: 8px; color: #38bdf8; }
-    header p { color: var(--text-muted); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
-    @media (max-width: 768px) { .tool-grid { grid-template-columns: 1fr; } }
+    body {
+      background: #0a0a0c;
+      color: #fff;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0a0c 100%);
+      line-height: 1.6;
+    }
 
-    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; }
-    
-    .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
-    .form-control { width: 100%; padding: 10px; background: #0f172a; border: 1px solid var(--border-color); color: #fff; border-radius: 6px; }
-    
-    .color-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    
-    .preview-box { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; background: #0f172a; border-radius: 8px; border: 2px dashed var(--border-color); margin-bottom: 15px; }
-    canvas { border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    /* Rainbow Animation */
+    @keyframes rainbow-flow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
 
-    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
-    .btn { flex: 1; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; text-align: center; text-decoration: none; display: inline-block; }
-    .btn-primary { background: var(--primary-color); color: white; }
-    .btn-primary:hover { opacity: 0.9; }
+    .rainbow-text {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-flow 3s linear infinite;
+    }
 
-    .code-box { background: #0f172a; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 0.85rem; color: #38bdf8; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+    .rainbow-border {
+      position: relative;
+      background: #111;
+      border-radius: 15px;
+    }
+
+    .rainbow-border::after {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      z-index: -1;
+      border-radius: 17px;
+      animation: rainbow-flow 3s linear infinite;
+    }
+
+    /* Layout */
+    header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 12, 0.8);
+    }
+
+    header h1 { font-size: 2.2rem; margin-bottom: 5px; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    /* Tools Section */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+
+    .tool-card {
+      background: var(--glass-bg);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.3s;
+    }
+
+    .tool-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.08); }
+
+    .preview-area {
+      height: 150px;
+      background: #000;
+      margin: 20px 0;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      overflow: hidden;
+      border: 2px solid var(--gold);
+      position: relative;
+    }
+
+    .input-group { margin-bottom: 15px; }
+    .input-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text-muted); }
+    
+    input, select {
+      width: 100%;
+      padding: 12px;
+      background: #222;
+      border: 1px solid #444;
+      color: #fff;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .btn-download {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+      animation: rainbow-flow 3s linear infinite;
+      transition: opacity 0.2s;
+    }
+    .btn-download:hover { opacity: 0.9; }
+
+    /* Industry Gallery Grid */
+    .section-title { margin: 40px 0 20px 0; font-size: 1.8rem; text-align: center; color: var(--gold); }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .design-frame {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 15px;
+      position: relative;
+      text-align: center;
+    }
+
+    .badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--gold);
+      color: #000;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .frame-3d {
+      height: 120px;
+      background: #000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      margin-top: 10px;
+    }
+
+    .code-box {
+      background: #000;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      border: 1px solid #333;
+    }
 
     /* Article SEO Styles */
-    article { background: var(--card-bg); border-radius: 12px; padding: 30px; border: 1px solid var(--border-color); margin-top: 40px; }
-    article h2 { color: #38bdf8; margin-top: 20px; margin-bottom: 10px; font-size: 1.5rem; }
-    article h3 { color: #e2e8f0; margin-top: 15px; margin-bottom: 8px; font-size: 1.2rem; }
+    article {
+      background: var(--glass-bg);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-top: 40px;
+    }
+    article h2 { color: var(--gold); margin-top: 20px; margin-bottom: 10px; font-size: 1.5rem; }
     article p, article ul { color: var(--text-muted); margin-bottom: 15px; }
     article ul { padding-left: 20px; }
-    article li { margin-bottom: 5px; }
+
+    #renderCanvas { display: none; }
   </style>
 </head>
 <body>
 
   <amp-auto-ads type="adsense" data-ad-client="ca-pub-5407249785989200"></amp-auto-ads>
 
+  <header>
+    <h1 class="rainbow-text">AWDEV Favicon & Logo Studio</h1>
+    <p style="color: var(--text-muted);">Generate 3D Favicons & Arabic Typography Logos Instantly</p>
+  </header>
+
   <div class="container">
-    <header>
-      <h1>Online Favicon Generator</h1>
-      <p>Create high-resolution custom favicons from text, emojis, or shapes in seconds.</p>
-    </header>
-
+    <!-- Live Tools Section -->
     <div class="tool-grid">
-      <!-- Controls -->
-      <div class="card">
-        <div class="form-group">
-          <label for="textInput">Text or Emoji</label>
-          <input type="text" id="textInput" class="form-control" value="AW" maxlength="3">
+      <!-- Tool 1: Font Style -->
+      <div class="tool-card rainbow-border">
+        <h3>Calligraphy & Font Tool</h3>
+        <div class="preview-area" id="prev1">خط عربي</div>
+        <div class="input-group">
+          <label for="text1">Text Input</label>
+          <input type="text" id="text1" value="خط عربي" oninput="updatePreview(1)">
         </div>
-
-        <div class="color-inputs">
-          <div class="form-group">
-            <label for="bgColor">Background</label>
-            <input type="color" id="bgColor" class="form-control" value="#0d6efd">
-          </div>
-          <div class="form-group">
-            <label for="textColor">Text Color</label>
-            <input type="color" id="textColor" class="form-control" value="#ffffff">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="shape">Icon Shape</label>
-          <select id="shape" class="form-control">
-            <option value="square">Square</option>
-            <option value="rounded" selected>Rounded Corners</option>
-            <option value="circle">Circle</option>
+        <div class="input-group">
+          <label for="font1">Font Style</label>
+          <select id="font1" onchange="updatePreview(1)">
+            <option value="sans-serif">Modern Sans-Serif</option>
+            <option value="serif">Classic Serif</option>
+            <option value="monospace">Tech Monospace</option>
+            <option value="cursive">Calligraphy / Cursive</option>
           </select>
         </div>
-
-        <div class="form-group">
-          <label for="fontFamily">Font Family</label>
-          <select id="fontFamily" class="form-control">
-            <option value="sans-serif">Sans-Serif</option>
-            <option value="serif">Serif</option>
-            <option value="monospace">Monospace</option>
-          </select>
-        </div>
+        <button class="btn-download" onclick="downloadImg(1)">Download PNG (800x800)</button>
       </div>
 
-      <!-- Live Preview & Output -->
-      <div class="card">
-        <label style="margin-bottom: 10px; display:block; font-weight:600;">Live Preview (512x512)</label>
-        <div class="preview-box">
-          <canvas id="faviconCanvas" width="512" height="512"></canvas>
+      <!-- Tool 2: Color Style -->
+      <div class="tool-card rainbow-border">
+        <h3>Custom Color Logo Tool</h3>
+        <div class="preview-area" id="prev2" style="color: #d4af37;">شعار</div>
+        <div class="input-group">
+          <label for="text2">Text Input</label>
+          <input type="text" id="text2" value="شعار" oninput="updatePreview(2)">
         </div>
+        <div class="input-group">
+          <label for="color2">Text Color</label>
+          <input type="color" id="color2" value="#d4af37" oninput="updatePreview(2)">
+        </div>
+        <button class="btn-download" onclick="downloadImg(2)">Download PNG (800x800)</button>
+      </div>
 
-        <div class="btn-group">
-          <button id="downloadBtn" class="btn btn-primary">Download Favicon PNG</button>
+      <!-- Tool 3: Personal Name -->
+      <div class="tool-card rainbow-border">
+        <h3>Personal Signature Tool</h3>
+        <div class="preview-area rainbow-text" id="prev3">أحمد</div>
+        <div class="input-group">
+          <label for="text3">Name Input</label>
+          <input type="text" id="text3" value="أحمد" oninput="updatePreview(3)">
         </div>
+        <button class="btn-download" onclick="downloadImg(3)">Download PNG (800x800)</button>
       </div>
     </div>
 
-    <!-- Generated Meta Tags -->
-    <div class="card" style="margin-bottom: 40px;">
-      <label style="margin-bottom: 10px; display:block; font-weight:600;">HTML Meta Tags</label>
-      <div class="code-box" id="htmlCode">
+    <!-- HTML Meta Code Output -->
+    <div class="tool-card" style="margin-bottom: 40px;">
+      <h3 style="margin-bottom: 10px; color: var(--gold);">Recommended HTML Meta Tags</h3>
+      <div class="code-box">
 &lt;!-- HTML Favicon Tags --&gt;
-&lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
-&lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
-&lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;
+&lt;link rel="icon" type="image/x-icon" href="https://awdev.eu.org/favicon.ico"&gt;
+&lt;link rel="shortcut icon" href="https://awdev.eu.org/awdev.jpg" type="image/jpeg"&gt;
+&lt;link rel="apple-touch-icon" href="https://awdev.eu.org/awdev.jpg"&gt;
       </div>
     </div>
 
-    <!-- SEO Article in English -->
+    <!-- 30 Preset Industries Gallery -->
+    <h2 class="section-title">Industry Design Templates</h2>
+    <div class="gallery-grid" id="gallery"></div>
+
+    <!-- Hidden Offscreen Canvas for Rendering PNG Exports -->
+    <canvas id="renderCanvas" width="800" height="800"></canvas>
+
+    <!-- SEO English Article -->
     <article>
-      <h2>What is a Favicon and Why is it Important for Your Website?</h2>
-      <p>A <strong>favicon</strong> (short for "favorites icon") is a small icon displayed next to the website title in browser tabs, bookmarks, history logs, and search engine results. Despite its tiny display size, a favicon plays a vital role in digital branding and user experience (UX).</p>
+      <h2>Professional 3D Favicon & Logo Generator Tool</h2>
+      <p>A <strong>favicon</strong> serves as the primary visual identifier for your brand on modern web browsers, app shortcuts, and search engine results pages. Our online studio provides immediate client-side rendering capability for multi-language calligraphy, logos, and custom favicons.</p>
       
-      <h2>Key Benefits of Having a Custom Favicon</h2>
+      <h2>Why Custom Icons Matter for Modern Web Apps</h2>
       <ul>
-        <li><strong>Brand Recognition:</strong> Helps users instantly identify your tab among dozens of open browser tabs.</li>
-        <li><strong>Professional Credibility:</strong> Websites without a favicon display a default blank page icon, making them look incomplete or untrustworthy.</li>
-        <li><strong>Improved SEO & CTR:</strong> Modern search engines like Google display favicons alongside search result snippets on mobile and desktop views, improving click-through rates.</li>
+        <li><strong>Enhanced Usability:</strong> Instant tab identification among crowded browser sessions.</li>
+        <li><strong>Brand Authority:</strong> Professional sites display clear high-resolution graphics on all devices.</li>
+        <li><strong>SEO Impact:</strong> Search engines feature site icons prominently on mobile SERP layouts.</li>
       </ul>
 
-      <h2>Recommended Favicon Sizes for Web Developers</h2>
-      <p>To ensure crisp visual rendering across all operating systems and platforms, web standards recommend generating multiple icon sizes:</p>
+      <h2>Recommended Favicon Standard Specifications</h2>
+      <p>Ensure optimal rendering across Android, iOS, and Web platforms using standardized dimensions:</p>
       <ul>
-        <li><strong>16x16 px:</strong> Standard browser tab icon size.</li>
-        <li><strong>32x32 px:</strong> High-DPI / Retina desktop browser icon.</li>
-        <li><strong>180x180 px:</strong> Apple Touch Icon for iOS home screen shortcuts.</li>
-        <li><strong>512x512 px:</strong> Progressive Web App (PWA) splash screen icon.</li>
+        <li><strong>16x16 px & 32x32 px:</strong> Browser tab & bookmark viewports.</li>
+        <li><strong>180x180 px:</strong> Apple Touch icons for mobile bookmarks.</li>
+        <li><strong>512x512 px:</strong> Web App manifest and high-DPI displays.</li>
       </ul>
-
-      <h2>How to Implement Favicons in HTML</h2>
-      <p>Insert the generated HTML link tags inside your website's <code>&lt;head&gt;</code> section to load your custom icons properly across all major platforms.</p>
     </article>
   </div>
 
-  <!-- JavaScript Generator Logic -->
   <script>
-    const canvas = document.getElementById('faviconCanvas');
-    const ctx = canvas.getContext('2d');
+    // Data 30 Industri
+    const industries = [
+      "Pendidikan", "Kesehatan", "Kuliner", "Kecantikan", "Jasa Hukum",
+      "Keuangan", "Teknologi", "Properti", "Fashion", "Pariwisata",
+      "Logistik", "Konstruksi", "Pertanian", "Otomotif", "Hiburan",
+      "Fotografi", "Interior", "Manufaktur", "Olahraga", "Percetakan",
+      "Sosial", "Keagamaan", "Event Organizer", "Seni Kreatif", "Perhiasan",
+      "Peternakan", "Bisnis Konsultan", "Pet Care", "Coffee Shop", "Energi"
+    ];
 
-    const textInput = document.getElementById('textInput');
-    const bgColor = document.getElementById('bgColor');
-    const textColor = document.getElementById('textColor');
-    const shape = document.getElementById('shape');
-    const fontFamily = document.getElementById('fontFamily');
-    const downloadBtn = document.getElementById('downloadBtn');
+    // Populate Gallery Grid
+    const gallery = document.getElementById('gallery');
+    industries.forEach((name, i) => {
+      gallery.innerHTML += `
+        <div class="design-frame">
+          <span class="badge">PRO</span>
+          <div class="frame-3d">
+            <div>
+              <div style="font-size: 12px; color: var(--gold);">Design for:</div>
+              <div class="rainbow-text" style="font-weight: 800; font-size: 14px;">${name}</div>
+              <div style="margin-top:5px; font-size:18px;">تصميم ${i+1}</div>
+            </div>
+          </div>
+          <div style="margin-top: 12px; display: flex; gap: 5px;">
+            <button onclick="mockAction('View ${name}')" style="flex:1; background:#333; color:white; border:none; padding:6px; border-radius:5px; cursor:pointer; font-size:11px;">View</button>
+            <button onclick="downloadIndustry('${name}')" style="flex:1; background:var(--gold); color:black; border:none; padding:6px; border-radius:5px; cursor:pointer; font-weight:bold; font-size:11px;">PNG</button>
+            <button onclick="mockAction('SVG ${name}')" style="flex:1; background:var(--rainbow-gradient); color:white; border:none; padding:6px; border-radius:5px; cursor:pointer; font-size:11px;">SVG</button>
+          </div>
+        </div>
+      `;
+    });
 
-    function drawFavicon() {
-      const size = 512;
-      ctx.clearRect(0, 0, size, size);
+    // Functional Tools Logic
+    function updatePreview(id) {
+      const text = document.getElementById('text' + id).value || (id === 1 ? 'خط عربي' : id === 2 ? 'شعار' : 'أحمد');
+      const prev = document.getElementById('prev' + id);
+      prev.innerText = text;
 
-      // Draw Background Shape
-      ctx.fillStyle = bgColor.value;
-      ctx.beginPath();
-      
-      if (shape.value === 'square') {
-        ctx.fillRect(0, 0, size, size);
-      } else if (shape.value === 'circle') {
-        ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
-        ctx.fill();
-      } else if (shape.value === 'rounded') {
-        const radius = 80;
-        ctx.roundRect(0, 0, size, size, radius);
-        ctx.fill();
+      if(id === 1) prev.style.fontFamily = document.getElementById('font1').value;
+      if(id === 2) prev.style.color = document.getElementById('color2').value;
+    }
+
+    // Canvas Downloader Function
+    function downloadImg(id) {
+      const canvas = document.getElementById('renderCanvas');
+      const ctx = canvas.getContext('2d');
+      const prev = document.getElementById('prev' + id);
+      const text = prev.innerText;
+
+      // Background Rendering
+      ctx.fillStyle = "#0a0a0c";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Gold Border Frame
+      ctx.strokeStyle = "#d4af37";
+      ctx.lineWidth = 20;
+      ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
+
+      // Font Styles Setup
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      if (id === 2) {
+        ctx.fillStyle = document.getElementById('color2').value;
+        ctx.font = `bold 120px sans-serif`;
+      } else if (id === 1) {
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `bold 120px ${document.getElementById('font1').value}`;
+      } else {
+        // Rainbow Gradient Fill for ID 3
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+        gradient.addColorStop(0, '#ff0000');
+        gradient.addColorStop(0.2, '#ff7f00');
+        gradient.addColorStop(0.4, '#ffff00');
+        gradient.addColorStop(0.6, '#00ff00');
+        gradient.addColorStop(0.8, '#0000ff');
+        gradient.addColorStop(1, '#8b00ff');
+        ctx.fillStyle = gradient;
+        ctx.font = `bold 140px sans-serif`;
       }
 
-      // Draw Text
-      const text = textInput.value;
-      ctx.fillStyle = textColor.value;
+      ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+      // Trigger Download Link
+      const link = document.createElement('a');
+      link.download = `favicon-logo-${id}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function downloadIndustry(name) {
+      const canvas = document.getElementById('renderCanvas');
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = "#0a0a0c";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = "#d4af37";
+      ctx.lineWidth = 15;
+      ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       
-      // Dynamic Font Size based on text length
-      let fontSize = size * 0.5;
-      if (text.length === 2) fontSize = size * 0.45;
-      if (text.length >= 3) fontSize = size * 0.35;
+      // Draw Industry Title
+      ctx.fillStyle = "#d4af37";
+      ctx.font = "bold 50px sans-serif";
+      ctx.fillText(`DESIGN FOR: ${name.toUpperCase()}`, canvas.width / 2, canvas.height / 2 - 50);
 
-      ctx.font = `bold ${fontSize}px ${fontFamily.value}`;
-      ctx.fillText(text, size / 2, size / 2 + 10);
-    }
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 90px cursive";
+      ctx.fillText("AWDEV STUDIO", canvas.width / 2, canvas.height / 2 + 50);
 
-    // Download Canvas Image
-    downloadBtn.addEventListener('click', function() {
       const link = document.createElement('a');
-      link.download = 'favicon.png';
+      link.download = `favicon-${name.toLowerCase().replace(/\s+/g, '-')}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
-    });
+    }
 
-    // Event Listeners for Live Updates
-    [textInput, bgColor, textColor, shape, fontFamily].forEach(element => {
-      element.addEventListener('input', drawFavicon);
-    });
-
-    // Initial Render
-    drawFavicon();
+    function mockAction(actionName) {
+      alert(`${actionName} mode activated!`);
+    }
   </script>
-
 </body>
-</html>
+</html>  
