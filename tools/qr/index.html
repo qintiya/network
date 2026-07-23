@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWDev QR Code Generator - Ultimate Webmaster & Developer Toolbox</title>
+  
+  <meta name="google-site-verification" content="ApJ2vxUeLQdmpTqLVx21AfHuUJMtK6DU3GpuaoFLtuk">
+  <meta name="google-site-verification" content="gbPa2MRABFiJSWv4hIj24aNn2MTRfi7W96fncHPziHI">
+  <meta name="google-adsense-account" content="ca-pub-5407249785989200">
+
+  <!-- Favicon & Icon Fix -->
+  <link rel="icon" type="image/x-icon" href="https://awdev.eu.org/favicon.ico">
+  <link rel="shortcut icon" href="https://awdev.eu.org/awdev.jpg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="https://awdev.eu.org/awdev.jpg">
+
+  <!-- Performance & DNS Prefetching -->
+  <link rel="dns-prefetch" href="https://ad.doubleclick.net">
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://adservice.google.com">
+  <link rel="dns-prefetch" href="https://secureads.g.doubleclick.net">
+  <link rel="dns-prefetch" href="https://www.googletagservices.com">
+  <link rel="preload" as="script" href="https://securepubads.g.doubleclick.net/tag/js/gpt.js">
+
+  <!-- Fonts & External QRCode Engine -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  
+  <!-- Google AdSense & AMP Scripts -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5407249785989200" crossorigin="anonymous"></script>
+  <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+
+  <style>
+    :root {
+      --rainbow-gradient: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --gold: #d4af37;
+      --card-bg: #141419;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-muted: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #08080a;
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #08080a 70%);
+      line-height: 1.6;
+    }
+
+    @keyframes rainbow-flow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .rainbow-text {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-flow 4s linear infinite;
+    }
+
+    header {
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 8, 10, 0.88);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Language Switcher Buttons */
+    .lang-switcher {
+      display: flex;
+      gap: 8px;
+      margin-top: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .lang-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover, .lang-btn.active {
+      background: #3b82f6;
+      color: #ffffff;
+      border-color: #60a5fa;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 25px 20px; }
+
+    /* Search Bar Engine */
+    .search-section {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 700px;
+      padding: 16px 24px;
+      background: #121218;
+      border: 1px solid #334155;
+      color: #fff;
+      border-radius: 30px;
+      outline: none;
+      font-size: 1.05rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .search-box:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Layout Main Workspace */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 25px;
+    }
+
+    @media (max-width: 992px) {
+      .workspace-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Left Tools Directory / Sidebar */
+    .tools-sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .tools-sidebar::-webkit-scrollbar { width: 6px; }
+    .tools-sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    .category-group { margin-bottom: 20px; }
+    .category-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 10px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .tool-list { list-style: none; }
+    .tool-item {
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tool-item:hover, .tool-item.active {
+      background: rgba(99, 102, 241, 0.15);
+      color: #818cf8;
+      padding-left: 16px;
+    }
+
+    /* Main Converter Workspace */
+    .converter-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .active-tool-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .active-tool-title { font-size: 1.4rem; font-weight: 700; color: #f1f5f9; }
+
+    /* Interactive QR Code UI Styling */
+    .qr-type-selector {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .type-btn {
+      background: #1e1e24;
+      border: 1px solid #27272a;
+      color: #94a3b8;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .type-btn:hover, .type-btn.active {
+      background: #3b82f6;
+      color: #ffffff;
+      border-color: #60a5fa;
+    }
+
+    .qr-workspace {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 25px;
+    }
+
+    @media (max-width: 768px) { .qr-workspace { grid-template-columns: 1fr; } }
+
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: var(--text-muted); }
+    
+    input[type="text"], input[type="email"], textarea, select {
+      width: 100%;
+      background: #0a0a0f;
+      border: 1px solid #27272a;
+      color: #38bdf8;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.92rem;
+      outline: none;
+    }
+
+    .qr-display-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0a0a0f;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 20px;
+      min-height: 280px;
+    }
+
+    #qrcode-canvas {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    /* Control Buttons */
+    .action-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+    }
+    .btn-action {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      animation: rainbow-flow 3s linear infinite;
+    }
+    .btn-secondary { background: #1e293b; border: 1px solid #334155; }
+    .btn-secondary:hover { background: #334155; }
+
+    /* SEO Article Styling */
+    article {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid var(--border-color);
+      margin-top: 40px;
+    }
+    article h1 { color: #f8fafc; margin-bottom: 20px; font-size: 2.1rem; line-height: 1.3; }
+    article h2 { color: var(--gold); margin-top: 35px; margin-bottom: 14px; font-size: 1.5rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 8px; }
+    article h3 { color: #e2e8f0; margin-top: 25px; margin-bottom: 10px; font-size: 1.2rem; }
+    article p, article ul, article ol { color: #cbd5e1; margin-bottom: 18px; font-size: 1rem; line-height: 1.85; }
+    article ul, article ol { padding-left: 24px; }
+    article li { margin-bottom: 8px; }
+    article code { background: #111116; padding: 2px 6px; border-radius: 4px; color: #f43f5e; font-family: 'Fira Code', monospace; font-size: 0.9em; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid var(--border-color);
+      margin-top: 50px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AMP Auto Ads Placement -->
+  <amp-auto-ads type="adsense" data-ad-client="ca-pub-5407249785989200"></amp-auto-ads>
+
+  <header>
+    <h1 class="rainbow-text" style="font-size: 2.2rem; font-weight: 800;">All Online Tools by DNS Checker</h1>
+    <p id="headerSubtitle" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 2px;">
+      The Most Complete Ecosystem for Server, DNS, Network, Cyber Security, Dev, Designer & Productivity Tools
+    </p>
+
+    <!-- Language Selector Buttons -->
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="switchLanguage('en')">🇺🇸 English</button>
+      <button class="lang-btn" onclick="switchLanguage('id')">🇮🇩 Indonesia</button>
+      <button class="lang-btn" onclick="switchLanguage('es')">🇪🇸 Español</button>
+      <button class="lang-btn" onclick="switchLanguage('fr')">🇫🇷 Français</button>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Search Bar Engine -->
+    <div class="search-section">
+      <input type="text" id="toolSearch" class="search-box" placeholder="🔍 Search online tools (e.g., QR Code, DNS Lookup, Base64, Subnet, Ping, Password Generator)..." onkeyup="filterTools()">
+    </div>
+
+    <!-- Main Workspace Grid -->
+    <div class="workspace-grid">
+      
+      <!-- Left Navigation Directory -->
+      <aside class="tools-sidebar">
+        
+        <div class="category-group">
+          <div class="category-title">📱 Generator Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item active" onclick="selectTool('qr-gen', 'AWDev QR Code Generator')">QR Code Generator</li>
+            <li class="tool-item" onclick="selectTool('pass-gen', 'Strong Password Generator')">Password Generator</li>
+            <li class="tool-item" onclick="selectTool('hash-gen', 'MD5 / SHA256 Generator')">Hash Generator</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">🌐 DNS Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('dns-lookup', 'DNS Lookup / Propagation Check')">DNS Lookup Check</li>
+            <li class="tool-item" onclick="selectTool('mx-lookup', 'MX Record Lookup')">MX Record Lookup</li>
+            <li class="tool-item" onclick="selectTool('ns-lookup', 'NS (NameServer) Lookup')">NS Record Lookup</li>
+            <li class="tool-item" onclick="selectTool('spf-check', 'SPF Record Checker')">SPF Record Checker</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">📍 IP Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('my-ip', 'What is My IP Address?')">What is My IP?</li>
+            <li class="tool-item" onclick="selectTool('ip-geo', 'IP Geolocation Lookup')">IP Geolocation Lookup</li>
+            <li class="tool-item" onclick="selectTool('subnet-calc', 'IPv4 Subnet Calculator')">IPv4 Subnet Calculator</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">💻 Dev Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('json-format', 'JSON Formatter & Validator')">JSON Formatter</li>
+            <li class="tool-item" onclick="selectTool('base64', 'Base64 Encoder / Decoder')">Base64 Encoder/Decoder</li>
+            <li class="tool-item" onclick="selectTool('url-encode', 'URL Encoder / Decoder')">URL Encoder/Decoder</li>
+          </ul>
+        </div>
+
+      </aside>
+
+      <!-- Right Interactive QR Code Generator Engine -->
+      <main class="converter-card">
+        <div class="active-tool-header">
+          <h2 class="active-tool-title" id="activeToolName">AWDev QR Code Generator</h2>
+          <span style="font-size: 0.85rem; background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 10px; border-radius: 20px;" id="toolCategoryBadge">Generator Tools</span>
+        </div>
+
+        <!-- Data Type Selection Tabs -->
+        <div class="qr-type-selector">
+          <button class="type-btn active" onclick="switchQrType('url')">🌐 URL</button>
+          <button class="type-btn" onclick="switchQrType('vcard')">📇 VCard</button>
+          <button class="type-btn" onclick="switchQrType('text')">📝 Text</button>
+          <button class="type-btn" onclick="switchQrType('email')">✉️ Email</button>
+          <button class="type-btn" onclick="switchQrType('sms')">💬 SMS</button>
+        </div>
+
+        <div class="qr-workspace">
+          
+          <!-- Dynamic Input Form -->
+          <div id="qrFormContainer">
+            
+            <!-- URL Input Fields (Default) -->
+            <div id="form-url" class="qr-form-block">
+              <div class="form-group">
+                <label>Website URL:</label>
+                <input type="text" id="urlInput" placeholder="https://awdev.eu.org" value="https://awdev.eu.org">
+              </div>
+            </div>
+
+            <!-- VCard Input Fields -->
+            <div id="form-vcard" class="qr-form-block" style="display: none;">
+              <div class="form-group">
+                <label>Full Name:</label>
+                <input type="text" id="vName" placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="text" id="vPhone" placeholder="+1234567890">
+              </div>
+              <div class="form-group">
+                <label>Email Address:</label>
+                <input type="email" id="vEmail" placeholder="john@example.com">
+              </div>
+              <div class="form-group">
+                <label>Company / Organization:</label>
+                <input type="text" id="vCompany" placeholder="AWDev Corp">
+              </div>
+            </div>
+
+            <!-- Plain Text Input Fields -->
+            <div id="form-text" class="qr-form-block" style="display: none;">
+              <div class="form-group">
+                <label>Text Content:</label>
+                <textarea id="textInput" placeholder="Enter your custom message or text payload here..." style="height: 120px;"></textarea>
+              </div>
+            </div>
+
+            <!-- Email Input Fields -->
+            <div id="form-email" class="qr-form-block" style="display: none;">
+              <div class="form-group">
+                <label>Recipient Email:</label>
+                <input type="email" id="emailTo" placeholder="support@awdev.eu.org">
+              </div>
+              <div class="form-group">
+                <label>Subject:</label>
+                <input type="text" id="emailSubject" placeholder="Inquiry about services">
+              </div>
+              <div class="form-group">
+                <label>Email Body:</label>
+                <textarea id="emailBody" placeholder="Hello AWDev Team..." style="height: 80px;"></textarea>
+              </div>
+            </div>
+
+            <!-- SMS Input Fields -->
+            <div id="form-sms" class="qr-form-block" style="display: none;">
+              <div class="form-group">
+                <label>Phone Number:</label>
+                <input type="text" id="smsPhone" placeholder="+1234567890">
+              </div>
+              <div class="form-group">
+                <label>SMS Message:</label>
+                <textarea id="smsBody" placeholder="Type your SMS message here..." style="height: 90px;"></textarea>
+              </div>
+            </div>
+
+            <div class="action-row">
+              <button class="btn btn-action" onclick="generateQRCode()">Generate QR Code</button>
+              <button class="btn btn-secondary" onclick="resetQrForm()">Clear Data</button>
+            </div>
+
+          </div>
+
+          <!-- QR Code Preview Display Area -->
+          <div class="qr-display-box">
+            <div id="qrcode-canvas"></div>
+            <button class="btn btn-secondary" id="btnDownload" onclick="downloadQRCode()" style="width: 100%;">📥 Download PNG</button>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+
+    <!-- AdSense Middle Responsive Unit -->
+    <div style="margin: 30px 0; text-align: center;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5407249785989200"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- SEO Comprehensive Article Section -->
+    <article id="articleContent">
+      <h1>AWDev QR Code Generator: Create Free, High-Resolution Static QR Codes Online</h1>
+
+      <p>
+        Generate a QR Code instantly with this fantastic QR code generator. This tool helps you make a high-resolution QR code for your data. To generate the QR Code, select a data type of your choice, enter data into the given field, and submit it to generate your static QR code. You can download the code in image form and share it with anyone.
+      </p>
+
+      <h2>Supported QR Code Data Formats</h2>
+      <p>
+        AWDev QR Code Generator supports five primary standard static QR formats optimized for mobile device scanning across Android and iOS platforms:
+      </p>
+
+      <ul>
+        <li><strong>URL (Web Address):</strong> Instantly directs users to your website, landing page, social media profile, or online store.</li>
+        <li><strong>VCard (Digital Business Card):</strong> Shares full personal or corporate contact details (Name, Mobile Number, Email, Company) that can be instantly saved into a phone's address book.</li>
+        <li><strong>Text (Plain String):</strong> Encodes arbitrary text messages, Wi-Fi keys, coupon codes, or notes without requiring internet connectivity to read.</li>
+        <li><strong>Email:</strong> Pre-fills a recipient email address, subject line, and body message directly in the user's default email client.</li>
+        <li><strong>SMS:</strong> Pre-configures a target phone number and text payload to streamline mobile messaging campaigns.</li>
+      </ul>
+
+      <h2>Why Use High-Resolution Static QR Codes?</h2>
+      <p>
+        Static QR codes embed information directly into the matrix data pattern. Unlike dynamic links, static QR codes never expire, require no database tracking backend, and ensure maximum user privacy and lightning-fast scanning capabilities.
+      </p>
+    </article>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 AWDev Online Tools Engine & DNS Checker Ecosystem. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Interactive JavaScript QR Logic Engine -->
+  <script>
+    let currentQrType = 'url';
+    let qrEngine = null;
+
+    // Initialize default QR Code on Page Load
+    window.addEventListener('load', () => {
+      qrEngine = new QRCode(document.getElementById("qrcode-canvas"), {
+        width: 180,
+        height: 180,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+      generateQRCode();
+    });
+
+    // Switch between URL, VCard, Text, Email, SMS tabs
+    function switchQrType(type) {
+      currentQrType = type;
+
+      // Update Tab Button Styles
+      const buttons = document.querySelectorAll('.type-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Toggle Input Form Views
+      const blocks = document.querySelectorAll('.qr-form-block');
+      blocks.forEach(block => block.style.display = 'none');
+      document.getElementById(`form-${type}`).style.display = 'block';
+    }
+
+    // Generate Payload based on Selected Data Type
+    function generateQRCode() {
+      let payload = '';
+
+      if (currentQrType === 'url') {
+        payload = document.getElementById('urlInput').value.trim() || 'https://awdev.eu.org';
+      } else if (currentQrType === 'vcard') {
+        const name = document.getElementById('vName').value.trim();
+        const phone = document.getElementById('vPhone').value.trim();
+        const email = document.getElementById('vEmail').value.trim();
+        const comp = document.getElementById('vCompany').value.trim();
+        payload = `BEGIN:VCARD\nVERSION:3.0\nN:${name}\nFN:${name}\nORG:${comp}\nTEL:${phone}\nEMAIL:${email}\nEND:VCARD`;
+      } else if (currentQrType === 'text') {
+        payload = document.getElementById('textInput').value.trim() || 'AWDev QR Code Payload';
+      } else if (currentQrType === 'email') {
+        const to = document.getElementById('emailTo').value.trim();
+        const sub = encodeURIComponent(document.getElementById('emailSubject').value.trim());
+        const body = encodeURIComponent(document.getElementById('emailBody').value.trim());
+        payload = `mailto:${to}?subject=${sub}&body=${body}`;
+      } else if (currentQrType === 'sms') {
+        const phone = document.getElementById('smsPhone').value.trim();
+        const body = encodeURIComponent(document.getElementById('smsBody').value.trim());
+        payload = `smsto:${phone}:${body}`;
+      }
+
+      // Re-draw QR Code
+      qrEngine.clear();
+      qrEngine.makeCode(payload);
+    }
+
+    // Download QR Code Image as PNG
+    function downloadQRCode() {
+      const img = document.querySelector('#qrcode-canvas img');
+      const canvas = document.querySelector('#qrcode-canvas canvas');
+      
+      let imageSrc = '';
+      if (img && img.src) {
+        imageSrc = img.src;
+      } else if (canvas) {
+        imageSrc = canvas.toDataURL("image/png");
+      }
+
+      if (imageSrc) {
+        const link = document.createElement('a');
+        link.href = imageSrc;
+        link.download = `AWDev-QRCode-${currentQrType}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        alert('Please generate a QR Code first.');
+      }
+    }
+
+    // Reset Form Fields
+    function resetQrForm() {
+      const activeBlock = document.getElementById(`form-${currentQrType}`);
+      const inputs = activeBlock.querySelectorAll('input, textarea');
+      inputs.forEach(input => input.value = '');
+    }
+
+    // Search Filter Engine
+    function filterTools() {
+      const input = document.getElementById('toolSearch').value.toLowerCase();
+      const items = document.querySelectorAll('.tool-item');
+      
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        item.style.display = text.includes(input) ? "block" : "none";
+      });
+    }
+
+    // Tool Switcher Placeholder
+    function selectTool(id, name) {
+      document.getElementById('activeToolName').innerText = name;
+      const items = document.querySelectorAll('.tool-item');
+      items.forEach(item => item.classList.remove('active'));
+      if(event && event.target) {
+        event.target.classList.add('active');
+      }
+    }
+
+    // Language Switcher Placeholder
+    function switchLanguage(lang) {
+      document.documentElement.lang = lang;
+      const langBtns = document.querySelectorAll('.lang-btn');
+      langBtns.forEach(btn => btn.classList.remove('active'));
+      if(event && event.target) event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
