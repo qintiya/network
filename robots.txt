@@ -1,0 +1,57 @@
+User-agent: Mediapartners-Google
+
+User-agent: Google-Display-Ads-Bot
+
+User-agent: *
+Disallow: 
+
+User-agent: Googlebot
+Disallow: 
+User-agent: googlebot-image
+Disallow: 
+User-agent: googlebot-mobile
+Disallow: 
+User-agent: MSNBot
+Disallow: 
+User-agent: Slurp
+Disallow: 
+User-agent: yahoo-mmcrawler
+Disallow: 
+User-agent:  yahoo-blogs/v3.9
+Disallow: 
+User-agent: Teoma
+Disallow: 
+User-agent: Gigabot
+Disallow: 
+User-agent: Robozilla
+Disallow: 
+User-agent: Nutch
+Disallow: 
+User-agent: ia_archiver
+Disallow: 
+User-agent: baiduspider
+Disallow: 
+User-agent: naverbot
+User-agent: yeti
+Disallow: 
+User-agent: psbot
+Disallow: 
+Disallow:
+
+User-agent: Mediapartners-Google
+Disallow: 
+
+User-agent: *
+Disallow: /search
+Allow: /
+
+
+Sitemap: https://awdev.eu.org/atom.xml?redirect=false&start-index=1&max-results=500
+Sitemap: https://awdev.eu.org/sitemap.xml
+Sitemap: https://awdev.eu.org/rss.xml
+Sitemap: https://awdev.eu.org/atom.xml
+Sitemap: https://www.awdev.eu.org/atom.xml?redirect=false&start-index=1&max-results=500
+Sitemap: https://www.awdev.eu.org/sitemap.xml
+Sitemap: https://www.awdev.eu.org/rss.xml
+Sitemap: https://www.awdev.eu.org/atom.xml
+Sitemap: https://www.awdev.eu.org/sitemap-pages.xml
