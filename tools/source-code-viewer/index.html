@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Source Code Viewer | Inspect HTML Page Source Code Free</title>
+
+  <!-- Canonical & Meta -->
+  <link rel="canonical" href="https://awdev.eu.org/tools/source-code-viewer">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="View, inspect, analyze, and download any website HTML source code online with accurate statistics including character count, word count, line count, and file size.">
+  <meta name="google-site-verification" content="ApJ2vxUeLQdmpTqLVx21AfHuUJMtK6DU3GpuaoFLtuk">
+  <meta name="google-adsense-account" content="ca-pub-5407249785989200">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/x-icon" href="https://awdev.eu.org/favicon.ico">
+  <link rel="shortcut icon" href="https://awdev.eu.org/awdev.jpg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="https://awdev.eu.org/awdev.jpg">
+
+  <!-- Font & ACE Editor CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.32.7/ace.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Google AdSense & AMP Scripts -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5407249785989200" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --rainbow-gradient: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --gold: #d4af37;
+      --card-bg: #1e293b;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-muted: #94a3b8;
+      --accent-green: #10b981;
+      --accent-blue: #3b82f6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0c;
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 20%, #1a1a2e 0%, #0a0a0c 100%);
+      line-height: 1.7;
+    }
+
+    @keyframes rainbow-flow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .rainbow-text {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-flow 4s linear infinite;
+    }
+
+    .rainbow-border {
+      position: relative;
+      background: #111115;
+      border-radius: 16px;
+    }
+
+    .rainbow-border::after {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      z-index: -1;
+      border-radius: 18px;
+      animation: rainbow-flow 4s linear infinite;
+    }
+
+    header {
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 12, 0.85);
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 25px 20px; }
+
+    .tool-card {
+      background: var(--glass-bg);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-color);
+      margin-bottom: 35px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .input-group { margin-bottom: 20px; }
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+    
+    .url-input-wrapper {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    input[type="url"] {
+      flex: 1;
+      min-width: 280px;
+      padding: 14px 18px;
+      background: #16161d;
+      border: 1px solid #334155;
+      color: #fff;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input[type="url"]:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.95rem;
+      transition: transform 0.15s, opacity 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    
+    .btn-action {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      animation: rainbow-flow 3s linear infinite;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+    }
+    .btn-secondary { background: #1e293b; border: 1px solid #334155; }
+    .btn-secondary:hover { background: #334155; }
+
+    /* Stats Dashboard Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .stat-card {
+      background: #111116;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: #52525b; }
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 4px;
+      font-family: 'Fira Code', monospace;
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    /* Editor Box */
+    .editor-wrapper {
+      margin-top: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #334155;
+    }
+
+    .editor-header {
+      background: #18181f;
+      padding: 12px 18px;
+      border-bottom: 1px solid #27272a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .editor-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #editor {
+      width: 100%;
+      height: 480px;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+    }
+
+    .controls-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .status-badge {
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #334155;
+      color: var(--text-muted);
+    }
+
+    /* Article Styling */
+    article {
+      background: var(--glass-bg);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid var(--border-color);
+      margin-top: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    article h1 { color: #f8fafc; margin-bottom: 20px; font-size: 2rem; line-height: 1.3; }
+    article h2 { color: var(--gold); margin-top: 35px; margin-bottom: 14px; font-size: 1.45rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 8px; }
+    article h3 { color: #e2e8f0; margin-top: 25px; margin-bottom: 10px; font-size: 1.15rem; }
+    article p, article ul, article ol { color: #cbd5e1; margin-bottom: 18px; font-size: 1rem; line-height: 1.8; }
+    article ul, article ol { padding-left: 24px; }
+    article li { margin-bottom: 8px; }
+    article code { background: #16161d; padding: 2px 6px; border-radius: 4px; color: #f43f5e; font-family: 'Fira Code', monospace; font-size: 0.9em; }
+
+    @media (max-width: 640px) {
+      .container { padding: 15px 10px; }
+      .tool-card, article { padding: 20px; }
+      #editor { height: 350px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="rainbow-text">Online Source Code Viewer</h1>
+    <p style="color: var(--text-muted); margin-top: 5px;">Fetch, Inspect, Analyze, and Download HTML Source Code Instantly</p>
+  </header>
+
+  <div class="container">
+    <div class="tool-card rainbow-border">
+      
+      <!-- Input Section -->
+      <div class="input-group">
+        <label for="targetUrl">Enter Webpage Target URL</label>
+        <div class="url-input-wrapper">
+          <input type="url" id="targetUrl" placeholder="https://example.com" value="https://example.com">
+          <button class="btn btn-action" id="fetchBtn" onclick="fetchSourceCode()">
+            <span>⚡ Generate Source Code</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="controls-row" style="margin-top: 15px;">
+        <button class="btn btn-secondary" id="copyBtn" onclick="copySourceCode()" disabled>📋 Copy Code</button>
+        <button class="btn btn-secondary" id="downloadBtn" onclick="downloadSourceCode()" disabled>💾 Download File</button>
+        <button class="btn btn-secondary" id="openBtn" onclick="openTargetUrl()">↗ Open Target Site</button>
+        <span class="status-badge" id="statusBadge">Status: Ready</span>
+      </div>
+
+      <!-- Live Statistics Dashboard -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="statChars">0</div>
+          <div class="stat-label">Characters</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statWords">0</div>
+          <div class="stat-label">Words</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statLines">0</div>
+          <div class="stat-label">Lines</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statSize">0 KB</div>
+          <div class="stat-label">File Size</div>
+        </div>
+      </div>
+
+      <!-- Source Code Editor Frame -->
+      <div class="editor-wrapper">
+        <div class="editor-header">
+          <div class="editor-title">
+            <span>📄 HTML Editor & Syntax Viewer</span>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">ACE Editor Engine</span>
+        </div>
+        <div id="editor"></div>
+      </div>
+
+    </div>
+
+    <!-- SEO English Article -->
+    <article>
+      <h1>Online Source Code Viewer: Comprehensive Guide to Web Markup Analysis & Source Inspection</h1>
+      
+      <p>An <strong>Online Source Code Viewer</strong> is an indispensable web utility built for developers, search engine optimization (SEO) auditors, cyber-security researchers, and digital marketers. It enables users to view, inspect, extract, and analyze the underlying HTML, JavaScript, CSS, and structural metadata of any accessible web page directly within an interactive, syntax-highlighted environment.</p>
+
+      <p>Understanding how a server renders HTML markup to a browser client is foundational to modern web technology. By leveraging a real-time web-based code viewer, technical professionals can perform granular audits, identify render-blocking assets, debug broken layouts, examine embedded structured data (Schema.org), and extract crucial SEO tags without altering their local browser developer tools.</p>
+
+      <h2>What is an Online Source Code Viewer?</h2>
+      <p>An online source code viewer fetches the raw HTML code returned by a target server in response to an HTTP GET request. Web pages are constructed using standard markup languages—primarily <strong>HTML5</strong>—styled with <strong>CSS3</strong>, and animated or logic-driven via <strong>JavaScript</strong>. When you enter a URL into an online viewer, proxy nodes send a clean HTTP request to retrieve the original DOM output prior to heavy client-side manipulations or local browser overrides.</p>
+
+      <p>This tool utilizes the industry-standard <code>ACE Editor</code> syntax engine configured with HTML visual themes. It formats, highlights, and structures dense codeblocks into easily readable, line-numbered code segments while calculating exact metadata metrics like character counts, total words, line totals, and overall file sizes in real time.</p>
+
+      <h2>Key Features of Modern Web Code Inspection Tools</h2>
+      <ul>
+        <li><strong>Real-time Syntax Highlighting:</strong> Automatically parses HTML tags, attributes, strings, comments, and embedded scripts into distinct color palettes for instant visual scanning.</li>
+        <li><strong>Comprehensive Analytics Engine:</strong> Calculates detailed statistics including total <strong>Characters</strong>, <strong>Words</strong>, total <strong>Lines of Code</strong>, and calculated payload <strong>Size</strong> (in Bytes, KB, or MB).</li>
+        <li><strong>CORS & Proxy Fetching:</strong> Bypasses Cross-Origin Resource Sharing restrictions by utilizing resilient CORS proxies to fetch source code securely across external domains.</li>
+        <li><strong>One-Click Code Export:</strong> Easily copy the extracted DOM source directly to your clipboard or download it as a standardized <code>.html</code> file for offline local development and archiving.</li>
+        <li><strong>Fully Responsive Interactive Workspace:</strong> Offers collapsible code sections, precise line numbering, and scroll synchronization optimized across desktop, tablet, and mobile browsers.</li>
+      </ul>
+
+      <h2>Why Inspect HTML Source Code? Core Technical Use Cases</h2>
+      
+      <h3>1. Technical SEO Auditing and Verification</h3>
+      <p>Search engine spiders (such as Googlebot) primary analyze raw server HTML responses. Inspecting raw source code allows SEO specialists to verify critical on-page ranking factors:</p>
+      <ul>
+        <li><strong>Canonical Tags:</strong> Verify <code>&lt;link rel="canonical"&gt;</code> configurations to prevent duplicate content indexing penalties.</li>
+        <li><strong>Meta Robots Directives:</strong> Inspect <code>&lt;meta name="robots" content="index, follow"&gt;</code> headers to ensure crucial landing pages aren't accidentally hidden from search engines.</li>
+        <li><strong>Open Graph & Twitter Cards:</strong> Ensure social sharing previews contain accurate <code>og:image</code>, <code>og:title</code>, and <code>og:description</code> properties.</li>
+        <li><strong>Structured Data & JSON-LD:</strong> Validate microdata and Schema markup embedded inside <code>&lt;script type="application/ld+json"&gt;</code> blocks for rich snippet eligibilities.</li>
+      </ul>
+
+      <h3>2. Competitive Intelligence & Technology Stack Profiling</h3>
+      <p>By reviewing source code markup, web architects can discover third-party libraries, tracking pixels, tag managers, content management systems (CMSs like WordPress, Shopify, or Drupal), and UI frameworks (Tailwind, Bootstrap, React DOM output) utilized by industry competitors.</p>
+
+      <h3>3. Security Auditing and Malware Detection</h3>
+      <p>Cybersecurity analysts utilize source code viewers to uncover hidden malicious scripts, unauthorized iframe injections, obfuscated JavaScript redirections, and hidden spam links embedded by compromise vectors.</p>
+
+      <h2>Understanding Document Statistics & Payload Metrics</h2>
+      <p>Optimizing web document sizes directly impacts Google Core Web Vitals, specifically <em>Largest Contentful Paint (LCP)</em> and <em>Interaction to Next Paint (INP)</em>. Our tool automatically computes four core dimensions:</p>
+      
+      <ol>
+        <li><strong>Characters:</strong> The complete UTF-8 byte character tally of the source document including whitespace, tags, and script text.</li>
+        <li><strong>Words:</strong> Total textual tokens parsed throughout the document, giving content strategists insight into content density.</li>
+        <li><strong>Lines:</strong> Total line breaks within the markup. High line counts without minification indicate uncompressed source files.</li>
+        <li><strong>Payload Size:</strong> The total raw memory volume of the markup. Keeping raw HTML files under 100 KB ensures swift DOM parsing and lower time-to-first-byte (TTFB) latency.</li>
+      </ol>
+
+      <h2>How to Use This Online Source Code Viewer Tool</h2>
+      <ol>
+        <li><strong>Enter URL:</strong> Type or paste the full target URL (including <code>https://</code>) into the input address field above.</li>
+        <li><strong>Generate Source Code:</strong> Click the <strong>⚡ Generate Source Code</strong> button to initialize the automated proxy fetcher.</li>
+        <li><strong>Inspect & Analyze:</strong> Scroll through the syntax-highlighted editor frame to review tags, embedded styles, scripts, and review the live metrics dashboard.</li>
+        <li><strong>Copy or Download:</strong> Use the <strong>📋 Copy Code</strong> button to copy raw markup to your clipboard, or click <strong>💾 Download File</strong> to export a clean HTML document to your computer.</li>
+      </ol>
+
+      <h2>Conclusion</h2>
+      <p>Whether you are debugging complex responsive web templates, inspecting technical SEO configurations, or studying modern web engineering patterns, using an <strong>Online Source Code Viewer</strong> provides a clean, automated, and secure window into the web's structural foundation.</p>
+    </article>
+  </div>
+
+  <script>
+    // Initialize ACE Editor Engine
+    let editor = ace.edit("editor");
+    editor.setTheme("ace/theme/one_dark");
+    editor.session.setMode("ace/mode/html");
+    editor.setShowPrintMargin(false);
+    editor.setFontSize(14);
+    editor.setReadOnly(false);
+    
+    // Set Initial Placeholder Code
+    const initialPlaceholder = `<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Source Code Viewer Target</title>\n</head>\n<body>\n  <h1>Enter a URL above and click 'Generate Source Code'</h1>\n</body>\n</html>`;
+    editor.setValue(initialPlaceholder, -1);
+    updateMetrics(initialPlaceholder);
+
+    // Update real-time statistics (Characters, Words, Lines, File Size)
+    function updateMetrics(codeText) {
+      const charCount = codeText.length;
+      const linesCount = codeText ? codeText.split('\n').length : 0;
+      
+      // Calculate word count
+      const trimmed = codeText.trim();
+      const wordCount = trimmed ? trimmed.split(/\s+/).length : 0;
+      
+      // Calculate byte/file size
+      const bytes = new Blob([codeText]).size;
+      let formattedSize = "0 B";
+      if (bytes < 1024) {
+        formattedSize = bytes + " B";
+      } else if (bytes < 1024 * 1024) {
+        formattedSize = (bytes / 1024).toFixed(2) + " KB";
+      } else {
+        formattedSize = (bytes / (1024 * 1024)).toFixed(2) + " MB";
+      }
+
+      // Update UI elements
+      document.getElementById('statChars').innerText = charCount.toLocaleString();
+      document.getElementById('statWords').innerText = wordCount.toLocaleString();
+      document.getElementById('statLines').innerText = linesCount.toLocaleString();
+      document.getElementById('statSize').innerText = formattedSize;
+    }
+
+    // Bind editor change event to live recalculate stats
+    editor.session.on('change', function() {
+      const currentCode = editor.getValue();
+      updateMetrics(currentCode);
+    });
+
+    // Clean URL input helper
+    function sanitizeUrl(url) {
+      let trimmed = url.trim();
+      if (!/^https?:\/\//i.test(trimmed)) {
+        trimmed = 'https://' + trimmed;
+      }
+      return trimmed;
+    }
+
+    // Main Fetch Function with fallback CORS proxies
+    async function fetchSourceCode() {
+      const inputEl = document.getElementById('targetUrl');
+      const fetchBtn = document.getElementById('fetchBtn');
+      const statusBadge = document.getElementById('statusBadge');
+      
+      if (!inputEl.value.trim()) {
+        alert("Please enter a valid URL!");
+        return;
+      }
+
+      const targetUrl = sanitizeUrl(inputEl.value.trim());
+      inputEl.value = targetUrl;
+
+      // UI Loading States
+      fetchBtn.disabled = true;
+      fetchBtn.innerHTML = "<span>⏳ Fetching Code...</span>";
+      statusBadge.innerText = "Status: Connecting to proxy...";
+      statusBadge.style.color = "#facc15";
+
+      // Array of reliable CORS proxies for fallback
+      const proxies = [
+        (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`
+      ];
+
+      let fetchedHTML = "";
+      let success = false;
+
+      for (let i = 0; i < proxies.length; i++) {
+        try {
+          statusBadge.innerText = `Status: Trying Request Proxy #${i + 1}...`;
+          const proxyUrl = proxies[i](targetUrl);
+          const response = await fetch(proxyUrl);
+          
+          if (response.ok) {
+            fetchedHTML = await response.text();
+            if (fetchedHTML && fetchedHTML.trim().length > 0) {
+              success = true;
+              break;
+            }
+          }
+        } catch (err) {
+          console.warn(`Proxy ${i + 1} failed:`, err);
+        }
+      }
+
+      if (success) {
+        editor.setValue(fetchedHTML, -1);
+        updateMetrics(fetchedHTML);
+        
+        // Enable action buttons
+        document.getElementById('copyBtn').disabled = false;
+        document.getElementById('downloadBtn').disabled = false;
+        
+        statusBadge.innerText = "Status: Successfully Loaded!";
+        statusBadge.style.color = "#4ade80";
+      } else {
+        alert("Failed to fetch source code from the target URL. The site may be blocking proxy crawlers or restricting cross-origin requests.");
+        statusBadge.innerText = "Status: Fetch Failed";
+        statusBadge.style.color = "#f87171";
+      }
+
+      // Restore button UI
+      fetchBtn.disabled = false;
+      fetchBtn.innerHTML = "<span>⚡ Generate Source Code</span>";
+    }
+
+    // Copy code function
+    function copySourceCode() {
+      const code = editor.getValue();
+      if (!code) return;
+
+      navigator.clipboard.writeText(code).then(() => {
+        const copyBtn = document.getElementById('copyBtn');
+        const originalText = copyBtn.innerText;
+        copyBtn.innerText = "✓ Copied!";
+        setTimeout(() => copyBtn.innerText = originalText, 2000);
+      }).catch(err => {
+        alert("Failed to copy code: " + err);
+      });
+    }
+
+    // Download code function
+    function downloadSourceCode() {
+      const code = editor.getValue();
+      if (!code) return;
+
+      const rawInput = document.getElementById('targetUrl').value.trim();
+      let filename = "source-code.html";
+
+      try {
+        const domain = new URL(rawInput).hostname.replace(/[^a-z0-9]/gi, '_');
+        if (domain) filename = `${domain}-source.html`;
+      } catch (e) {
+        filename = "downloaded-source.html";
+      }
+
+      const blob = new Blob([code], { type: 'text/html;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Open target URL in new tab
+    function openTargetUrl() {
+      const inputEl = document.getElementById('targetUrl');
+      if (inputEl.value.trim()) {
+        window.open(sanitizeUrl(inputEl.value.trim()), '_blank');
+      }
+    }
+  </script>
+</body>
+</html>
