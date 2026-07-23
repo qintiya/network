@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWDEV - Multi-Language TTS & 3D Text Generator Suite</title>
+  <meta name="description" content="Convert text to speech, generate 3D animated text, and listen to multi-language articles online.">
+  <meta content='ApJ2vxUeLQdmpTqLVx21AfHuUJMtK6DU3GpuaoFLtuk' name='google-site-verification'/>
+  <meta content='gbPa2MRABFiJSWv4hIj24aNn2MTRfi7W96fncHPziHI' name='google-site-verification'/>
+  <!-- Favicon / Logo Icon -->
+  <link rel="shortcut icon" href="https://awdev.eu.org/awdev.jpg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="https://awdev.eu.org/awdev.jpg">
+
+  <meta content='ca-pub-5407249785989200' name='google-adsense-account'/><script async='async' crossorigin='anonymous' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5407249785989200'/>
+     <script async='async' custom-element='amp-auto-ads' src='https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js'>
+     </script>
+<link href='https://ad.doubleclick.net' rel='dns-prefetch'/>
+<link href='https://pagead2.googlesyndication.com' rel='dns-prefetch'/>
+<link href='https://googleads.g.doubleclick.net' rel='dns-prefetch'/>
+<link href='https://tpc.googlesyndication.com' rel='dns-prefetch'/>
+<link href='https://adservice.google.com' rel='dns-prefetch'/>
+<link href='https://secureads.g.doubleclick.net' rel='dns-prefetch'/>
+<link href='https://www.googletagservices.com' rel='dns-prefetch'/>
+<link as='script' href='https://securepubads.g.doubleclick.net/tag/js/gpt.js' rel='preload'/>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5407249785989200"
+     crossorigin="anonymous"></script>
+  <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
+  
+  <!-- CSS Styling -->
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--text-muted);
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    @media (min-width: 850px) {
+      .grid-layout {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #60a5fa;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Form Controls */
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    select, input[type="text"], textarea, input[type="file"] {
+      width: 100%;
+      padding: 10px 14px;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      outline: none;
+    }
+
+    select:focus, textarea:focus, input:focus {
+      border-color: var(--primary);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+
+    .btn-warning { background: #f59e0b; color: white; }
+    .btn-warning:hover { background: #d97706; }
+
+    .btn-danger { background: #ef4444; color: white; }
+    .btn-danger:hover { background: #dc2626; }
+
+    .btn-success { background: #10b981; color: white; }
+    .btn-success:hover { background: #059669; }
+
+    /* 3D Canvas Box */
+    #canvas-container {
+      width: 100%;
+      height: 250px;
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 15px;
+      border: 1px solid var(--border);
+    }
+
+    /* Responsive Image & Article */
+    .article-box {
+      margin-top: 30px;
+    }
+
+    .img-responsive {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 15px 0;
+      object-fit: cover;
+      max-height: 400px;
+    }
+
+    .article-content {
+      line-height: 1.8;
+      color: #cbd5e1;
+    }
+
+    .article-content p {
+      margin-bottom: 15px;
+    }
+
+    .flag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .flag-btn {
+      padding: 6px 12px;
+      background: #334155;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .flag-btn:hover {
+      background: var(--primary);
+    }
+  </style>
+
+  <!-- Three.js library for 3D Text -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Multi-Language Voice Reader & 3D Text Generator</h1>
+      <p>Listen to articles in 10 languages, convert text to speech automatically, and design dynamic 3D text animations right in your browser.</p>
+    </header>
+
+    <div class="grid-layout">
+      
+      <!-- TOOL 1: Multi-Language Article Reader -->
+      <div class="card">
+        <h2>🗣️ Select Article Language & Reader Audio</h2>
+        <label>Quick Select Language:</label>
+        <div class="flag-grid">
+          <button class="flag-btn" onclick="selectQuickLang('id-ID')">🇮🇩 Indonesia</button>
+          <button class="flag-btn" onclick="selectQuickLang('en-US')">🇺🇸 English</button>
+          <button class="flag-btn" onclick="selectQuickLang('ar-SA')">🇸🇦 Arabic</button>
+          <button class="flag-btn" onclick="selectQuickLang('hi-IN')">🇮🇳 Hindi</button>
+          <button class="flag-btn" onclick="selectQuickLang('ko-KR')">🇰🇷 Korean</button>
+          <button class="flag-btn" onclick="selectQuickLang('ru-RU')">🇷🇺 Russian</button>
+          <button class="flag-btn" onclick="selectQuickLang('zh-CN')">🇨🇳 Chinese</button>
+          <button class="flag-btn" onclick="selectQuickLang('es-ES')">🇪🇸 Spanish</button>
+          <button class="flag-btn" onclick="selectQuickLang('fr-FR')">🇫🇷 French</button>
+          <button class="flag-btn" onclick="selectQuickLang('de-DE')">🇩🇪 German</button>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="playArticle()">▶ Play Article</button>
+          <button class="btn btn-warning" onclick="pauseAudio()">⏸ Pause</button>
+          <button class="btn btn-danger" onclick="stopAudio()">⏹ Stop</button>
+        </div>
+      </div>
+
+      <!-- TOOL 2: Full Locale TTS Voice Reader -->
+      <div class="card">
+        <h2>🎙️ TTS Voice Reader Tool</h2>
+        
+        <label for="fileInput">Upload File Teks (.txt):</label>
+        <input type="file" id="fileInput" accept=".txt" onchange="handleFileUpload(event)">
+
+        <label for="customText">Free Text Input:</label>
+        <textarea id="customText" placeholder="Ketik atau tempel teks di sini untuk dibaca...">Selamat datang di AWDEV Multi-Language TTS & 3D Engine!</textarea>
+
+        <label for="voiceSelect">Select Voice / Device Access:</label>
+        <select id="voiceSelect">
+          <!-- Voice List dynamically populated via JS -->
+          <option value="as_IN">Assam India (as_IN)</option>
+          <option value="bg_BG">Bulgaria Bulgaria (bg_BG)</option>
+          <option value="bn_BD">Bengali Bangladesh (bn_BD)</option>
+          <option value="bn_IN">Bengali India (bn_IN)</option>
+          <option value="brx_IN">Bodo India (brx_IN)</option>
+          <option value="bs_BA_#Cyrl">Bosnia Bosnia under Herzegovina (bs_BA_#Cyrl)</option>
+          <option value="bs_BA_#Latin">Bosnia Bosnia and Herzegovina (bs_BA_#Latin)</option>
+          <option value="ca_ES">Spanish Catalan (ca_ES)</option>
+          <option value="cs_CZ">Czech Republic (cs_CZ)</option>
+          <option value="cy_GB">Welsh Great Britain (cy_GB)</option>
+          <option value="da_DK">Danish Denmark (da_DK)</option>
+          <option value="de_DE">Germany Germany (de_DE)</option>
+          <option value="doi_IN">Dogri India (doi_IN)</option>
+          <option value="el_GR">Greece Greece (el_GR)</option>
+          <option value="en_AU">Australian English (en_AU)</option>
+          <option value="en_GB">English Great Britain (en_GB)</option>
+          <option value="en_IN">English India (en_IN)</option>
+          <option value="en_NG">English Nigeria (en_NG)</option>
+          <option value="en_US" selected>English United States (en_US)</option>
+          <option value="es_ES">Spanish Spanish (es_ES)</option>
+          <option value="es_US">Spanish United States (es_US)</option>
+          <option value="et_EE">Estonia (et_EE)</option>
+          <option value="fi_FI">Finland Finlandia (fi_FI)</option>
+          <option value="fil_PH">Filipino Filipina (fil_PH)</option>
+          <option value="fr_CA">French Canada (fr_CA)</option>
+          <option value="fr_FR">French French (fr_FR)</option>
+          <option value="gu_IN">Gujarat India (gu_IN)</option>
+          <option value="iw_IL">Hebrew Israel (iw_IL)</option>
+          <option value="hi_IN">Hindi India (hi_IN)</option>
+          <option value="hr_HR">Croatia Croatia (hr_HR)</option>
+          <option value="hu_HU">Hungary Hungary (hu_HU)</option>
+          <option value="in_ID">Indonesia Indonesia (in_ID)</option>
+          <option value="is_IS">Iceland Iceland (is_IS)</option>
+          <option value="it_IT">Italia Italia (it_IT)</option>
+          <option value="ja_JP">Japan Japan (ja_JP)</option>
+          <option value="jv_ID">Javanese Indonesia (jv_ID)</option>
+          <option value="km_KH">Khmer Cambodia (km_KH)</option>
+          <option value="kn_IN">Kannada India (kn_IN)</option>
+          <option value="ko_KR">Korea South Korea (ko_KR)</option>
+          <option value="kok_IN">Konkani India (kok_IN)</option>
+          <option value="ks_IN_#Arab">Kashmir India (ks_IN_#Arab)</option>
+          <option value="lt_LT">Lithuanians Lithuania (lt_LT)</option>
+          <option value="lv_LV">Latvian Latvia (lv_LV)</option>
+          <option value="mai_IN">Maithili India (mai_IN)</option>
+          <option value="ml_IN">Indian Malayalam (ml_IN)</option>
+          <option value="mni_IN_#Beng">Manipuri India (mni_IN_#Beng)</option>
+          <option value="mr_IN">Marathi India (mr_IN)</option>
+          <option value="ms_MY">Malaysian Malay (ms_MY)</option>
+          <option value="nb_NO">Bokmål Norway Norway (nb_NO)</option>
+          <option value="ne_NP">Nepali Nepal (ne_NP)</option>
+          <option value="nl_BE">Netherlands Belgium (nl_BE)</option>
+          <option value="nl_NL">Netherlands Netherlands (nl_NL)</option>
+          <option value="or_IN">Oriya India (or_IN)</option>
+          <option value="pa_IN_#Guru">Indian Punjabi (pa_IN_#Guru)</option>
+          <option value="pl_PL">Polish Polandia (pl_PL)</option>
+          <option value="pt_BR">Brazilian Portuguese (pt_BR)</option>
+          <option value="pt_PT">Portuguese Portugal (pt_PT)</option>
+          <option value="ro_RO">Rumania Rumania (ro_RO)</option>
+          <option value="ru_RU">Russia Russia (ru_RU)</option>
+          <option value="sa_IN">Indian Sanskrit (sa_IN)</option>
+          <option value="sat_IN_#Olck">Santali India (sat_IN_#Olck)</option>
+          <option value="sd_IN_#Deva">Sindhi India (sd_IN_#Deva)</option>
+          <option value="si_LK">Sri Lankan Sinhalese (si_LK)</option>
+          <option value="sk_SK">Slovak Slovakia (sk_SK)</option>
+          <option value="sl_SI">Slovenian Slovenia (sl_SI)</option>
+          <option value="sq_AL">Albania Albania (sq_AL)</option>
+          <option value="sr_RS_#Cyrl">Serbia Serbia (sr_RS_#Cyrl)</option>
+          <option value="sr_RS_#Latn">Serbia Serbia (sr_RS_#Latn)</option>
+          <option value="su_ID_#Latn">Sunda Indonesia (su_ID_#Latn)</option>
+          <option value="sv_SE">Sweden Sweden (sv_SE)</option>
+          <option value="sw_KE">Kenyan Swahili (sw_KE)</option>
+          <option value="ta_IN">Tamil India (ta_IN)</option>
+          <option value="te_IN">Telugu India (te_IN)</option>
+          <option value="th_TH">Thai Thailand (th_TH)</option>
+          <option value="tr_TR">Turki Turki (tr_TR)</option>
+          <option value="uk_UA">Ukraine Ukraine (uk_UA)</option>
+          <option value="ur_IN">Urdu India (ur_IN)</option>
+          <option value="ur_PK">Urdu Pakistan (ur_PK)</option>
+          <option value="vi_VN">Vietnam Vietnam (vi_VN)</option>
+          <option value="yue_HK_#Hant">Kanton Hong Kong (yue_HK_#Hant)</option>
+          <option value="zh_CN_#Hans">Chinese Chinese (zh_CN_#Hans)</option>
+          <option value="zh_HK_#Hans">Hong Kong Chinese (zh_HK_#Hans)</option>
+          <option value="zh_MO_#Hans">Fearful Chinese (zh_MO_#Hans)</option>
+          <option value="zh_SG_#Hans">Singaporean Chinese (zh_SG_#Hans)</option>
+          <option value="zh_HK_#Hant">China Hong Kong (zh_HK_#Hant)</option>
+          <option value="zh_MO_#Hant">Haunted Chinese (zh_MO_#Hant)</option>
+          <option value="zh_TW_#Hant">Taiwan (zh_TW_#Hant)</option>
+        </select>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="playCustomTTS()">▶ Play Custom</button>
+          <button class="btn btn-warning" onclick="pauseAudio()">⏸ Pause</button>
+          <button class="btn btn-danger" onclick="stopAudio()">⏹ Stop</button>
+          <button class="btn btn-success" onclick="downloadAudioText()">💾 Download Teks</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TOOL 3: 3D Text Animation Generator -->
+    <div class="card" style="margin-top: 25px;">
+      <h2>🎨 Dynamic 3D Text Generator</h2>
+      <label for="threedInput">3D Render Text Input:</label>
+      <input type="text" id="threedInput" value="AWDEV 2026" oninput="update3DText(this.value)">
+      <div id="canvas-container"></div>
+    </div>
+
+    <!-- ARTICLE SECTION -->
+    <div class="card article-box">
+      <h2>📰 Featured Tech Article (English)</h2>
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Tech Innovation 2026" class="img-responsive">
+      
+      <div id="articleBody" class="article-content">
+        <h3>The Transformation of Web Engineering and Synthetic Audio in 2026</h3>
+        <p>As we advance through 2026, the convergence of real-time browser rendering, neural audio synthesis, and interactive user interfaces has redefined how media is consumed across the global web. Modern web platforms are no longer static repositories of text; they have morphed into dynamic multi-modal applications capable of adapting instantly to user language preferences and accessibility requirements.</p>
+        
+        <p>Text-to-Speech (TTS) integration directly inside modern browsers through native APIs provides frictionless accessibility. Users from diverse geographical regions can consume high-density technical articles, dynamic reports, and instructional material in their native accents without requiring external plugins or proprietary installations.</p>
+
+        <p>Simultaneously, lightweight 3D graphics rendering engines powered by WebGL and WebGPU enable real-time spatial visual graphics to coexist seamlessly alongside textual data. This dual integration of sensory audio feedback and interactive 3D elements marks a significant milestone in modern web software engineering.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript Engine -->
+  <script>
+    // Global Speech Synthesis Reference
+    const synth = window.speechSynthesis;
+    let currentUtterance = null;
+    let voices = [];
+
+    // Load Available System Voices
+    function loadVoices() {
+      voices = synth.getVoices();
+    }
+    loadVoices();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    // Select Language Shortcut
+    function selectQuickLang(langCode) {
+      stopAudio();
+      playArticle(langCode);
+    }
+
+    // Play Main Featured Article
+    function playArticle(forcedLang = 'en-US') {
+      stopAudio();
+      const articleText = document.getElementById('articleBody').innerText;
+      currentUtterance = new SpeechSynthesisUtterance(articleText);
+      currentUtterance.lang = forcedLang;
+      currentUtterance.rate = 1.0;
+      synth.speak(currentUtterance);
+    }
+
+    // Play Custom TTS Text
+    function playCustomTTS() {
+      stopAudio();
+      const text = document.getElementById('customText').value;
+      if (!text.trim()) return alert("Silakan masukkan teks terlebih dahulu!");
+
+      const selectedLocale = document.getElementById('voiceSelect').value;
+      // Convert locale syntax (e.g. en_US -> en-US)
+      const cleanLocale = selectedLocale.replace('_', '-').split('_#')[0];
+
+      currentUtterance = new SpeechSynthesisUtterance(text);
+      currentUtterance.lang = cleanLocale;
+
+      // Find matched voice if available
+      const matchedVoice = voices.find(v => v.lang.replace('_', '-').includes(cleanLocale));
+      if (matchedVoice) {
+        currentUtterance.voice = matchedVoice;
+      }
+
+      synth.speak(currentUtterance);
+    }
+
+    // Controls
+    function pauseAudio() {
+      if (synth.speaking && !synth.paused) {
+        synth.pause();
+      } else if (synth.paused) {
+        synth.resume();
+      }
+    }
+
+    function stopAudio() {
+      if (synth.speaking || synth.paused) {
+        synth.cancel();
+      }
+    }
+
+    // File Upload Reader
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file && file.type === "text/plain") {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('customText').value = e.target.result;
+        };
+        reader.readAsText(file);
+      } else {
+        alert("Harap unggah file berformat .txt valid.");
+      }
+    }
+
+    // Download Text File
+    function downloadAudioText() {
+      const text = document.getElementById('customText').value;
+      const blob = new Blob([text], { type: "text/plain" });
+      const anchor = document.createElement("a");
+      anchor.download = "speech-text.txt";
+      anchor.href = window.URL.createObjectURL(blob);
+      anchor.click();
+    }
+
+    // ===================================================
+    // THREE.JS 3D TEXT RENDER ENGINE
+    // ===================================================
+    let scene, camera, renderer, textMesh;
+
+    function init3D() {
+      const container = document.getElementById('canvas-container');
+      scene = new THREE.Scene();
+      
+      camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.z = 250;
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      container.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+      scene.add(ambientLight);
+
+      const pointLight = new THREE.PointLight(0x3b82f6, 1.5);
+      pointLight.position.set(100, 100, 100);
+      scene.add(pointLight);
+
+      // Load Font for 3D Text
+      const loader = new THREE.FontLoader();
+      loader.load('https://threejs.org/examples/fonts/helvetiker_bold.typeface.json', function (font) {
+        window.loadedFont = font;
+        render3DText("AWDEV 2026");
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        if (textMesh) {
+          textMesh.rotation.y += 0.01;
+          textMesh.rotation.x += 0.005;
+        }
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+    function render3DText(textString) {
+      if (!window.loadedFont) return;
+      if (textMesh) scene.remove(textMesh);
+
+      const geometry = new THREE.TextGeometry(textString, {
+        font: window.loadedFont,
+        size: 25,
+        height: 8,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 2,
+        bevelSize: 1.5,
+        bevelSegments: 5
+      });
+
+      geometry.center();
+
+      const material = new THREE.MeshPhongMaterial({ color: 0x3b82f6, specular: 0xef4444 });
+      textMesh = new THREE.Mesh(geometry, material);
+      scene.add(textMesh);
+    }
+
+    function update3DText(value) {
+      render3DText(value || "AWDEV");
+    }
+
+    // Initialize 3D Engine on Page Load
+    window.onload = function() {
+      init3D();
+    };
+
+    // Responsive Canvas Resize
+    window.addEventListener('resize', () => {
+      const container = document.getElementById('canvas-container');
+      if (renderer && camera) {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      }
+    });
+  </script>
+
+<amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-5407249785989200">
+</amp-auto-ads>
+  
+</body>
+</html>     
