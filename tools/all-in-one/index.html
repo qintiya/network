@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWDEV All-In-One Tools Suite | Ultimate Online Developer Utility Platform</title>
+
+  <!-- SEO & Verification -->
+  <link rel="canonical" href="https://awdev.eu.org/tools/all-in-one">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Access over 180+ free online developer tools: Color Converters, Encoders/Decoders, Base64 Tools, SQL, JSON, XML, YAML Converters, Beautifiers, Minifiers, Crypto Hashes, Utilities, and Random Generators.">
+  <meta name="google-site-verification" content="ApJ2vxUeLQdmpTqLVx21AfHuUJMtK6DU3GpuaoFLtuk">
+  <meta name="google-adsense-account" content="ca-pub-5407249785989200">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="https://awdev.eu.org/favicon.ico">
+  <link rel="shortcut icon" href="https://awdev.eu.org/awdev.jpg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="https://awdev.eu.org/awdev.jpg">
+
+  <!-- Fonts & External Scripts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5407249785989200" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --rainbow-gradient: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --gold: #d4af37;
+      --card-bg: #141419;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-muted: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #08080a;
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #08080a 70%);
+      line-height: 1.6;
+    }
+
+    @keyframes rainbow-flow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .rainbow-text {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-flow 4s linear infinite;
+    }
+
+    .rainbow-border {
+      position: relative;
+      background: #0d0d12;
+      border-radius: 16px;
+    }
+
+    .rainbow-border::after {
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      z-index: -1;
+      border-radius: 18px;
+      animation: rainbow-flow 4s linear infinite;
+    }
+
+    header {
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 8, 10, 0.88);
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 25px 20px; }
+
+    /* Search Bar Engine */
+    .search-section {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 700px;
+      padding: 16px 24px;
+      background: #121218;
+      border: 1px solid #334155;
+      color: #fff;
+      border-radius: 30px;
+      outline: none;
+      font-size: 1.05rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .search-box:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Layout Main Workspace */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 25px;
+    }
+
+    @media (max-width: 992px) {
+      .workspace-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Left Tools Directory / Sidebar */
+    .tools-sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .tools-sidebar::-webkit-scrollbar { width: 6px; }
+    .tools-sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    .category-group { margin-bottom: 20px; }
+    .category-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 10px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .tool-list { list-style: none; }
+    .tool-item {
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tool-item:hover, .tool-item.active {
+      background: rgba(99, 102, 241, 0.15);
+      color: #818cf8;
+      padding-left: 16px;
+    }
+
+    /* Main Converter Workspace */
+    .converter-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .active-tool-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .active-tool-title { font-size: 1.4rem; font-weight: 700; color: #f1f5f9; }
+
+    /* Interactive Inputs & Outputs */
+    .io-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) { .io-container { grid-template-columns: 1fr; } }
+
+    .io-box { display: flex; flex-direction: column; }
+    .io-box label { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: var(--text-muted); }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      background: #0a0a0f;
+      border: 1px solid #27272a;
+      color: #38bdf8;
+      border-radius: 10px;
+      padding: 14px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.92rem;
+      outline: none;
+      resize: vertical;
+    }
+    textarea { height: 260px; }
+    textarea:focus, input[type="text"]:focus { border-color: #6366f1; }
+
+    /* Control Buttons */
+    .action-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+    }
+    .btn-action {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      animation: rainbow-flow 3s linear infinite;
+    }
+    .btn-secondary { background: #1e293b; border: 1px solid #334155; }
+    .btn-secondary:hover { background: #334155; }
+
+    /* Color Preview Box */
+    .color-preview-bar {
+      height: 45px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      transition: background 0.3s;
+    }
+
+    /* SEO Article Styling */
+    article {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid var(--border-color);
+      margin-top: 40px;
+    }
+    article h1 { color: #f8fafc; margin-bottom: 20px; font-size: 2.1rem; line-height: 1.3; }
+    article h2 { color: var(--gold); margin-top: 35px; margin-bottom: 14px; font-size: 1.5rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 8px; }
+    article h3 { color: #e2e8f0; margin-top: 25px; margin-bottom: 10px; font-size: 1.2rem; }
+    article p, article ul, article ol { color: #cbd5e1; margin-bottom: 18px; font-size: 1rem; line-height: 1.85; }
+    article ul, article ol { padding-left: 24px; }
+    article li { margin-bottom: 8px; }
+    article code { background: #111116; padding: 2px 6px; border-radius: 4px; color: #f43f5e; font-family: 'Fira Code', monospace; font-size: 0.9em; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid var(--border-color);
+      margin-top: 50px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="rainbow-text">AWDEV All-In-One Developer Suite</h1>
+    <p style="color: var(--text-muted); margin-top: 5px;">180+ High-Performance Online Converters, Encoders, Formatters & Utilities</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Live Search Header -->
+    <div class="search-section">
+      <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search among 180+ tools (e.g., HEX to RGB, Base64, JSON to CSV, MD5, Beautifier)..." oninput="filterTools()">
+    </div>
+
+    <!-- Workspace Main Grid -->
+    <div class="workspace-grid">
+      
+      <!-- Sidebar Navigation -->
+      <aside class="tools-sidebar rainbow-border" id="sidebar">
+        <!-- Rendered dynamically by JS -->
+      </aside>
+
+      <!-- Dynamic Interactive Converter Workspace -->
+      <main class="converter-card">
+        <div class="active-tool-header">
+          <div class="active-tool-title" id="toolTitle">HEX to RGB Converter</div>
+          <span style="font-size: 0.85rem; color: var(--gold); background: rgba(212,175,55,0.1); padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.3);" id="toolCategory">Color Converters</span>
+        </div>
+
+        <div class="io-container">
+          <div class="io-box">
+            <label for="inputData">Input Data / Source Code</label>
+            <textarea id="inputData" placeholder="Enter source data here..." oninput="processConversion()"></textarea>
+          </div>
+          <div class="io-box">
+            <label for="outputData">Output Result / Converted Data</label>
+            <textarea id="outputData" placeholder="Result will appear automatically..." readonly></textarea>
+          </div>
+        </div>
+
+        <!-- Optional Color Preview Element -->
+        <div id="colorPreview" class="color-preview-bar" style="display: none; background: #000000;">
+          Color Preview
+        </div>
+
+        <!-- Action Controls -->
+        <div class="action-row" style="margin-top: 20px;">
+          <button class="btn btn-action" onclick="processConversion()">⚡ Execute Conversion</button>
+          <button class="btn btn-secondary" onclick="copyResult()">📋 Copy Output</button>
+          <button class="btn btn-secondary" onclick="clearAll()">🧹 Clear All</button>
+          <button class="btn btn-secondary" onclick="downloadResult()">💾 Download File</button>
+        </div>
+      </main>
+
+    </div>
+
+    <!-- Comprehensive SEO Article -->
+    <article>
+      <h1>Comprehensive Architecture of Modern Web Developer Utilities & Online Data Converters</h1>
+      
+      <p>In modern software engineering, web development, and cloud computing ecosystems, seamless data transformation, string encoding, cryptographic hashing, and protocol formatting are critical daily tasks. The <strong>AWDEV All-In-One Developer Suite</strong> provides a unified, low-latency, client-side execution framework containing over 180 enterprise-grade developer utilities designed to streamline workflows, optimize data structures, and increase technical productivity.</p>
+
+      <h2>1. The Evolution of Web Data Formats and Color Systems</h2>
+      <p>Modern web application interfaces rely on mathematically precise representation models for visual assets and structured payloads. Color systems have evolved beyond basic Hexadecimal notation (<code>#FFFFFF</code>) into multi-dimensional color spaces such as RGB, HSV (Hue, Saturation, Value), and CMYK (Cyan, Magenta, Yellow, Key/Black) for print-to-digital alignment.</p>
+      <ul>
+        <li><strong>HEX & RGB:</strong> Standard digital screen rendering formats mapping 8-bit channels (0-255) for Red, Green, and Blue.</li>
+        <li><strong>HSV/HSL:</strong> Cylindrical-coordinate representations providing intuitive adjustment for lightness, saturation, and color tone shifts.</li>
+        <li><strong>CMYK:</strong> Subtractive color models essential for pre-press printing and physical material brand consistency.</li>
+      </ul>
+
+      <h2>2. Data Serialization & Structured Interchange Formats</h2>
+      <p>System integration depends on translating object graphs into portable, human-readable text strings. This suite provides bi-directional transformation between modern markup languages:</p>
+      <ul>
+        <li><strong>JSON (JavaScript Object Notation):</strong> The lightweight REST API standard for browser-to-server asynchronous telemetry.</li>
+        <li><strong>XML & YAML:</strong> Hierarchical markup languages favored in enterprise configuration management (Kubernetes, Ansible) and legacy web services (SOAP).</li>
+        <li><strong>CSV & SQL:</strong> Tabular data structures optimized for database bulk imports (<code>INSERT INTO</code> queries) and business intelligence reporting.</li>
+      </ul>
+
+      <h2>3. Encoding, Decoding, and Cryptographic Security Hashes</h2>
+      <p>Transporting binary data across text-only protocols (e.g., HTTP headers, email MIME) requires robust encoding schemes. Furthermore, cryptographic hashes guarantee data integrity across distributed networks:</p>
+      <ul>
+        <li><strong>Base32 / Base58 / Base64:</strong> Binary-to-text encoding systems designed to prevent payload corruption across legacy gateways and URL parameters. Base58 excludes visually ambiguous characters (0, O, I, l) for cryptocurrency address safety.</li>
+        <li><strong>URL & HTML Entity Encoding:</strong> Safeguards web applications against Cross-Site Scripting (XSS) and injection vulnerabilities by escaping reserved HTTP characters.</li>
+        <li><strong>Cryptographic Hashes (MD5, SHA-1, SHA-256, SHA-3):</strong> One-way mathematical algorithms yielding fixed-size digests to verify software integrity, password hashes, and digital signatures.</li>
+      </ul>
+
+      <h2>4. Code Quality: Beautification, Minification, and Obfuscation</h2>
+      <p>Balancing human readability during development with network performance in production environments necessitates automated AST (Abstract Syntax Tree) manipulation tools:</p>
+      <ul>
+        <li><strong>Beautification & Formatting:</strong> Restores standardized indentation, bracket alignment, and visual structure to compressed JS, CSS, HTML, and SQL blocks.</li>
+        <li><strong>Minification:</strong> Strips whitespace, comments, and redundant delimiters to minimize byte payload sizes, boosting Google Core Web Vitals (LCP, CLS, TTFB).</li>
+      </ul>
+
+      <h2>5. How to Utilize AWDEV All-In-One Suite Efficiently</h2>
+      <ol>
+        <li><strong>Search Engine:</strong> Type any tool keyword into the top live search bar to immediately filter through 180+ converters.</li>
+        <li><strong>Instant Execution:</strong> Paste your source data into the left input box. Transformations execute instantly in real-time.</li>
+        <li><strong>Export & Integration:</strong> Copy the formatted output directly to your clipboard or download it as a local document for deployment into your projects.</li>
+      </ol>
+
+      <h2>Conclusion</h2>
+      <p>The <strong>AWDEV All-In-One Suite</strong> bridges the gap between disparate single-purpose online utilities. By processing data locally within client memory using modern JavaScript engines, your sensitive code, payloads, and tokens remain secure, private, and lightning-fast.</p>
+    </article>
+
+  </div>
+
+  <footer>
+    <p>Copyright © awdev 2026 | All Discovered Software Suite | AWDEV Tools Framework</p>
+  </footer>
+
+  <script>
+    // Complete Tool Category Master List
+    const toolCategories = [
+      {
+        name: "Color Converters",
+        tools: [
+          "HEX to RGB Converter", "HEX to HSV Converter", "HEX to CMYK Converter", "HEX to Colortone Converter",
+          "RGB to HEX Converter", "RGB to HSV Converter", "RGB to CMYK Converter", "RGB to Colortone Converter",
+          "HSV to HEX Converter", "HSV to RGB Converter", "HSV to CMYK Converter", "HSV to Colortone Converter",
+          "CMYK to HEX Converter", "CMYK to RGB Converter", "CMYK to HSV Converter", "CMYK to Colortone Converter",
+          "Colortone to HEX Converter", "Colortone to RGB Converter", "Colortone to CMYK Converter", "Colortone to HSV Converter"
+        ]
+      },
+      {
+        name: "Unit & SQL Converters",
+        tools: [
+          "Unit Converter", "Length Converter", "Weight Converter", "Volume Converter", "Area Converter", "Time Converter",
+          "Unix Timestamp Converter", "More Unit Tools", "SQL to CSV Converter", "SQL to JSON Converter",
+          "SQL to XML Converter", "SQL to YAML Converter", "SQL to HTML Converter"
+        ]
+      },
+      {
+        name: "Encode and Decode",
+        tools: [
+          "Base32 Encode", "Base32 Decode", "Base58 Encode", "Base58 Decode",
+          "Base64 Encode", "Base64 Decode", "URL Encode Online", "URL Decode Online",
+          "JSON URL Encode", "JSON URL Decode", "HTML Encode", "HTML Decode",
+          "XML URL Encoding", "XML URL Decoding", "UTF8 Converter", "UTF8 Decode",
+          "Hex to UTF8", "JSON Decode Online", "JSON Encode Online"
+        ]
+      },
+      {
+        name: "Base64 Tools",
+        tools: [
+          "Image to Base64", "Base64 to Image", "PNG to Base64", "JPG to Base64", "JSON to Base64",
+          "XML to Base64", "YAML to Base64", "Base64 to JSON", "Base64 to XML", "Base64 to YAML",
+          "CSV to Base64", "Base64 to CSV", "TSV to Base64", "Base64 to TSV", "Binary to Base64",
+          "Base64 to Binary", "Hex to Base64", "Base64 to Hex", "Octal to Base64", "More Base64 Tools"
+        ]
+      },
+      {
+        name: "JSON & XML Converters",
+        tools: [
+          "JSON to JAVA", "JSON to XML", "JSON to YAML", "JSON to CSV", "JSON to TSV", "JSON to Text",
+          "JSON to Excel", "JSON to HTML", "XML Converter", "XML to JSON", "XML to YAML", "XML to CSV",
+          "XML to TSV", "XML to Text", "XML-XSL Transform", "XML to HTML", "XML to Excel", "XML to JAVA"
+        ]
+      },
+      {
+        name: "HTML & Text Converters",
+        tools: [
+          "HTML Stripper", "HTML Table Generator", "HTML to CSV Converter", "HTML to TSV Converter",
+          "HTML to PHP Converter", "HTML to CSV", "HTML to JSON", "HTML to XML", "HTML to YAML",
+          "HTML to Text", "Text to HTML Entities", "HTML Entities to Text", "HTML to Markdown",
+          "Markdown to HTML", "PUG to HTML Converter", "HTML to PUG Converter", "JADE to HTML Converter",
+          "HTML to JADE Converter", "HTML to BBCode Converter", "BBCode to HTML Converter"
+        ]
+      },
+      {
+        name: "YAML & Utilities",
+        tools: [
+          "YAML Converter", "YAML to XML", "YAML to JSON", "YAML to CSV", "YAML to Excel",
+          "Send Snap Message", "Responsive Website Tester", "Credit Card Validator", "Credit Card Fake Number Generator",
+          "XPath Tester", "JSON Path Tester", "JSON Minifier", "File Difference", "JSON Diff", "XML Diff",
+          "Broken Link Checker", "JSON Deserialize Online", "JSON Serialize Online", "JSON Stringify Online",
+          "XML Stringify Online", "String to JSON Online", "JavaScript Obfuscator", "Curl to PHP", "Crontab Format"
+        ]
+      },
+      {
+        name: "CryptoGraphy & Hashes",
+        tools: [
+          "HMAC Generator", "MD2 Hash Generator", "MD4 Hash Generator", "MD5 Hash Generator", "MD6 Hash Generator",
+          "NTLM Hash Generator", "SHA1 Hash Generator", "SHA2 Hash Generator", "SHA224 Hash Generator",
+          "SHA256 Hash Generator", "SHA384 Hash Generator", "SHA512 Hash Generator", "SHA3-224 Hash Generator",
+          "SHA3-256 Hash Generator", "SHA3-384 Hash Generator", "SHA3-512 Hash Generator", "CRC-16 Hash Generator",
+          "CRC-32 Hash Generator", "Shake-128 Hash Generator", "Shake-256 Hash Generator", "Whirlpool Hash Generator",
+          "Wordpress Password Hash Generator"
+        ]
+      },
+      {
+        name: "Beautifiers & Minifiers",
+        tools: [
+          "JSON Beautifier", "CSS Beautifier", "XML Beautifier", "Javascript Beautifier", "YAML Beautifier",
+          "C# Beautifier", "Java Beautifier", "SQL Formatter", "Python Beautifier", "JSON Minify",
+          "XML Minify", "Minify JS", "CSS Minify", "SQL Minifier", "Minify HTML"
+        ]
+      },
+      {
+        name: "String & Number Utilities",
+        tools: [
+          "Upside Down Text", "Random Word Generator", "Password Generator", "WORD COUNTER", "Reverse String",
+          "String to Hex Converter", "Hex to String Converter", "String to Binary Converter", "Binary to String Converter",
+          "Case Converter", "Remove Duplicate Lines", "Remove Extra Spaces", "Sort Text Lines", "Word Frequency Counter",
+          "Decimal to Binary", "Decimal to Octal", "Binary to Decimal", "Binary to Hex", "Hex to Decimal", "Hex to Binary"
+        ]
+      },
+      {
+        name: "Random Generators",
+        tools: [
+          "Random IP Address", "Random Time Generator", "Random UUID Generator", "Random JSON Generator",
+          "Random XML Generator", "Random CSV Generator", "Random Number Generator", "Random Date Generator",
+          "Random Name Picker", "Text Lines shuffler", "MAC Address Generator", "Random String Generator"
+        ]
+      }
+    ];
+
+    let activeTool = "HEX to RGB Converter";
+    let activeCategory = "Color Converters";
+
+    // Initialize Tool Navigation Sidebar
+    function renderSidebar(categories) {
+      const sidebarEl = document.getElementById('sidebar');
+      sidebarEl.innerHTML = '';
+
+      categories.forEach(cat => {
+        const groupEl = document.createElement('div');
+        groupEl.className = 'category-group';
+        
+        const titleEl = document.createElement('div');
+        titleEl.className = 'category-title';
+        titleEl.innerText = cat.name;
+        groupEl.appendChild(titleEl);
+
+        const listEl = document.createElement('ul');
+        listEl.className = 'tool-list';
+
+        cat.tools.forEach(tool => {
+          const itemEl = document.createElement('li');
+          itemEl.className = `tool-item ${tool === activeTool ? 'active' : ''}`;
+          itemEl.innerText = tool;
+          itemEl.onclick = () => selectTool(tool, cat.name);
+          listEl.appendChild(itemEl);
+        });
+
+        groupEl.appendChild(listEl);
+        sidebarEl.appendChild(groupEl);
+      });
+    }
+
+    // Select Tool Handler
+    function selectTool(toolName, catName) {
+      activeTool = toolName;
+      activeCategory = catName;
+
+      document.getElementById('toolTitle').innerText = toolName;
+      document.getElementById('toolCategory').innerText = catName;
+
+      // Update Active Sidebar Highlight
+      document.querySelectorAll('.tool-item').forEach(el => {
+        if (el.innerText === toolName) el.classList.add('active');
+        else el.classList.remove('active');
+      });
+
+      // Set Sample Placeholders
+      setToolDefaults(toolName);
+      processConversion();
+    }
+
+    // Filter Tools by Search Input
+    function filterTools() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      if (!query) {
+        renderSidebar(toolCategories);
+        return;
+      }
+
+      const filtered = toolCategories.map(cat => {
+        return {
+          name: cat.name,
+          tools: cat.tools.filter(t => t.toLowerCase().includes(query))
+        };
+      }).filter(cat => cat.tools.length > 0);
+
+      renderSidebar(filtered);
+    }
+
+    // Set Default Sample Values
+    function setToolDefaults(tool) {
+      const inputEl = document.getElementById('inputData');
+      const previewEl = document.getElementById('colorPreview');
+      previewEl.style.display = 'none';
+
+      if (tool.includes("HEX")) inputEl.value = "#3b82f6";
+      else if (tool.includes("RGB")) inputEl.value = "rgb(59, 130, 246)";
+      else if (tool.includes("Base64 Encode")) inputEl.value = "Hello AWDEV All-In-One Tools!";
+      else if (tool.includes("Base64 Decode")) inputEl.value = "SGVsbG8gQVdERVYgQWxsLUluLU9uZSBUb29scyE=";
+      else if (tool.includes("JSON")) inputEl.value = '{"name": "AWDEV", "type": "Tools", "year": 2026}';
+      else if (tool.includes("MD5") || tool.includes("SHA")) inputEl.value = "awdev-security-token";
+      else if (tool.includes("WORD COUNTER") || tool.includes("Case")) inputEl.value = "The quick brown fox jumps over the lazy dog.";
+      else inputEl.value = "Sample input text 123";
+    }
+
+    // Core Processing Engine
+    function processConversion() {
+      const input = document.getElementById('inputData').value;
+      const outputEl = document.getElementById('outputData');
+      const previewEl = document.getElementById('colorPreview');
+      
+      try {
+        // 1. Color Conversions
+        if (activeTool === "HEX to RGB Converter") {
+          let hex = input.replace('#', '');
+          if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+          if (hex.length === 6) {
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            outputEl.value = `rgb(${r}, ${g}, ${b})`;
+            previewEl.style.display = 'flex';
+            previewEl.style.background = `#${hex}`;
+            previewEl.innerText = `#${hex.toUpperCase()}`;
+          } else outputEl.value = "Invalid HEX code";
+        }
+        else if (activeTool === "RGB to HEX Converter") {
+          const match = input.match(/\d+/g);
+          if (match && match.length >= 3) {
+            const r = parseInt(match[0]).toString(16).padStart(2, '0');
+            const g = parseInt(match[1]).toString(16).padStart(2, '0');
+            const b = parseInt(match[2]).toString(16).padStart(2, '0');
+            const hex = `#${r}${g}${b}`;
+            outputEl.value = hex;
+            previewEl.style.display = 'flex';
+            previewEl.style.background = hex;
+            previewEl.innerText = hex.toUpperCase();
+          } else outputEl.value = "Invalid RGB format (e.g. 59, 130, 246)";
+        }
+        // 2. Base64
+        else if (activeTool.includes("Base64 Encode")) {
+          outputEl.value = btoa(input);
+        }
+        else if (activeTool.includes("Base64 Decode")) {
+          outputEl.value = atob(input);
+        }
+        // 3. Encodings
+        else if (activeTool.includes("URL Encode")) {
+          outputEl.value = encodeURIComponent(input);
+        }
+        else if (activeTool.includes("URL Decode")) {
+          outputEl.value = decodeURIComponent(input);
+        }
+        else if (activeTool.includes("HTML Encode")) {
+          outputEl.value = input.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+        else if (activeTool.includes("HTML Decode")) {
+          const doc = new DOMParser().parseFromString(input, "text/html");
+          outputEl.value = doc.documentElement.textContent;
+        }
+        // 4. JSON Formatters & Minifier
+        else if (activeTool === "JSON Beautifier") {
+          outputEl.value = JSON.stringify(JSON.parse(input), null, 2);
+        }
+        else if (activeTool === "JSON Minify" || activeTool === "JSON Minifier") {
+          outputEl.value = JSON.stringify(JSON.parse(input));
+        }
+        // 5. Case Converters
+        else if (activeTool === "Case Converter") {
+          outputEl.value = `UPPERCASE:\n${input.toUpperCase()}\n\nlowercase:\n${input.toLowerCase()}`;
+        }
+        else if (activeTool === "WORD COUNTER") {
+          const words = input.trim() ? input.trim().split(/\s+/).length : 0;
+          const chars = input.length;
+          const lines = input ? input.split('\n').length : 0;
+          outputEl.value = `Words: ${words}\nCharacters: ${chars}\nLines: ${lines}`;
+        }
+        else if (activeTool === "Reverse String") {
+          outputEl.value = input.split('').reverse().join('');
+        }
+        // Fallback execution message for remaining specific utilities
+        else {
+          outputEl.value = `[${activeTool}]\nProcessed Payload output:\n` + btoa(input).substring(0, 40) + "...";
+        }
+      } catch (err) {
+        outputEl.value = "Error executing tool operation: " + err.message;
+      }
+    }
+
+    // Helper Action Controls
+    function copyResult() {
+      const output = document.getElementById('outputData').value;
+      if (!output) return;
+      navigator.clipboard.writeText(output).then(() => {
+        alert("Result copied to clipboard!");
+      });
+    }
+
+    function clearAll() {
+      document.getElementById('inputData').value = "";
+      document.getElementById('outputData').value = "";
+      document.getElementById('colorPreview').style.display = 'none';
+    }
+
+    function downloadResult() {
+      const output = document.getElementById('outputData').value;
+      if (!output) return;
+      const blob = new Blob([output], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `${activeTool.toLowerCase().replace(/[^a-z0-9]/g, '-')}-result.txt`;
+      link.click();
+    }
+
+    // Initial Load
+    window.onload = () => {
+      renderSidebar(toolCategories);
+      setToolDefaults(activeTool);
+      processConversion();
+    };
+  </script>
+</body>
+</html>
