@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Online Toolbox - Ultimate Webmaster & Developer Toolbox</title>
+  
+  <meta name="google-site-verification" content="ApJ2vxUeLQdmpTqLVx21AfHuUJMtK6DU3GpuaoFLtuk">
+  <meta name="google-site-verification" content="gbPa2MRABFiJSWv4hIj24aNn2MTRfi7W96fncHPziHI">
+  <meta name="google-adsense-account" content="ca-pub-5407249785989200">
+
+  <!-- Favicon & Icon Fix -->
+  <link rel="icon" type="image/x-icon" href="https://awdev.eu.org/favicon.ico">
+  <link rel="shortcut icon" href="https://awdev.eu.org/awdev.jpg" type="image/jpeg">
+  <link rel="apple-touch-icon" href="https://awdev.eu.org/awdev.jpg">
+
+  <!-- Performance & DNS Prefetching -->
+  <link rel="dns-prefetch" href="https://ad.doubleclick.net">
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+  <link rel="dns-prefetch" href="https://tpc.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://adservice.google.com">
+  <link rel="dns-prefetch" href="https://secureads.g.doubleclick.net">
+  <link rel="dns-prefetch" href="https://www.googletagservices.com">
+  <link rel="preload" as="script" href="https://securepubads.g.doubleclick.net/tag/js/gpt.js">
+
+  <!-- Fonts & External Scripts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Google AdSense & AMP Scripts -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5407249785989200" crossorigin="anonymous"></script>
+  <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+
+  <style>
+    :root {
+      --rainbow-gradient: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --gold: #d4af37;
+      --card-bg: #141419;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-muted: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #08080a;
+      color: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #08080a 70%);
+      line-height: 1.6;
+    }
+
+    @keyframes rainbow-flow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .rainbow-text {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow-flow 4s linear infinite;
+    }
+
+    header {
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 8, 10, 0.88);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Language Switcher Buttons */
+    .lang-switcher {
+      display: flex;
+      gap: 8px;
+      margin-top: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .lang-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover, .lang-btn.active {
+      background: #3b82f6;
+      color: #ffffff;
+      border-color: #60a5fa;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 25px 20px; }
+
+    /* Search Bar Engine */
+    .search-section {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 700px;
+      padding: 16px 24px;
+      background: #121218;
+      border: 1px solid #334155;
+      color: #fff;
+      border-radius: 30px;
+      outline: none;
+      font-size: 1.05rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .search-box:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Layout Main Workspace */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 25px;
+    }
+
+    @media (max-width: 992px) {
+      .workspace-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Left Tools Directory / Sidebar */
+    .tools-sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .tools-sidebar::-webkit-scrollbar { width: 6px; }
+    .tools-sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    .category-group { margin-bottom: 20px; }
+    .category-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 10px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .tool-list { list-style: none; }
+    .tool-item {
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      margin-bottom: 4px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tool-item:hover, .tool-item.active {
+      background: rgba(99, 102, 241, 0.15);
+      color: #818cf8;
+      padding-left: 16px;
+    }
+
+    /* Main Converter Workspace */
+    .converter-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .active-tool-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .active-tool-title { font-size: 1.4rem; font-weight: 700; color: #f1f5f9; }
+
+    /* Interactive Inputs & Outputs */
+    .io-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) { .io-container { grid-template-columns: 1fr; } }
+
+    .io-box { display: flex; flex-direction: column; }
+    .io-box label { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: var(--text-muted); }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      background: #0a0a0f;
+      border: 1px solid #27272a;
+      color: #38bdf8;
+      border-radius: 10px;
+      padding: 14px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.92rem;
+      outline: none;
+      resize: vertical;
+    }
+    textarea { height: 260px; }
+    textarea:focus, input[type="text"]:focus { border-color: #6366f1; }
+
+    /* Control Buttons */
+    .action-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+    }
+    .btn-action {
+      background: var(--rainbow-gradient);
+      background-size: 200% auto;
+      animation: rainbow-flow 3s linear infinite;
+    }
+    .btn-secondary { background: #1e293b; border: 1px solid #334155; }
+    .btn-secondary:hover { background: #334155; }
+
+    /* Color Preview Box */
+    .color-preview-bar {
+      height: 45px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      transition: background 0.3s;
+    }
+
+    /* SEO Article Styling */
+    article {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid var(--border-color);
+      margin-top: 40px;
+    }
+    article h1 { color: #f8fafc; margin-bottom: 20px; font-size: 2.1rem; line-height: 1.3; }
+    article h2 { color: var(--gold); margin-top: 35px; margin-bottom: 14px; font-size: 1.5rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 8px; }
+    article h3 { color: #e2e8f0; margin-top: 25px; margin-bottom: 10px; font-size: 1.2rem; }
+    article p, article ul, article ol { color: #cbd5e1; margin-bottom: 18px; font-size: 1rem; line-height: 1.85; }
+    article ul, article ol { padding-left: 24px; }
+    article li { margin-bottom: 8px; }
+    article code { background: #111116; padding: 2px 6px; border-radius: 4px; color: #f43f5e; font-family: 'Fira Code', monospace; font-size: 0.9em; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid var(--border-color);
+      margin-top: 50px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AMP Auto Ads Placement -->
+  <amp-auto-ads type="adsense" data-ad-client="ca-pub-5407249785989200"></amp-auto-ads>
+
+  <header>
+    <h1 class="rainbow-text" style="font-size: 2.2rem; font-weight: 800;">All Online Toolbox by Awdev DNS Checker</h1>
+    <p id="headerSubtitle" style="color: var(--text-muted); font-size: 0.95rem; margin-top: 2px;">
+      The Most Complete Ecosystem for Server, DNS, Network, Cyber Security, Dev, Designer & Productivity Tools
+    </p>
+
+    <!-- Language Selector Buttons -->
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="switchLanguage('en')">🇺🇸 English</button>
+      <button class="lang-btn" onclick="switchLanguage('id')">🇮🇩 Indonesia</button>
+      <button class="lang-btn" onclick="switchLanguage('es')">🇪🇸 Español</button>
+      <button class="lang-btn" onclick="switchLanguage('fr')">🇫🇷 Français</button>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Search Bar Engine -->
+    <div class="search-section">
+      <input type="text" id="toolSearch" class="search-box" placeholder="🔍 Search online tools (e.g., DNS Lookup, Base64, Subnet, Ping, Password Generator)..." onkeyup="filterTools()">
+    </div>
+
+    <!-- Main Workspace Grid -->
+    <div class="workspace-grid">
+      
+      <!-- Left Navigation Directory -->
+      <aside class="tools-sidebar">
+        
+        <div class="category-group">
+          <div class="category-title">🌐 DNS Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item active" onclick="selectTool('dns-lookup', 'DNS Lookup / Propagation Check')">DNS Lookup Check</li>
+            <li class="tool-item" onclick="selectTool('mx-lookup', 'MX Record Lookup')">MX Record Lookup</li>
+            <li class="tool-item" onclick="selectTool('ns-lookup', 'NS (NameServer) Lookup')">NS Record Lookup</li>
+            <li class="tool-item" onclick="selectTool('spf-check', 'SPF Record Checker')">SPF Record Checker</li>
+            <li class="tool-item" onclick="selectTool('txt-lookup', 'TXT Record Lookup')">TXT Record Lookup</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">📍 IP Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('my-ip', 'What is My IP Address?')">What is My IP?</li>
+            <li class="tool-item" onclick="selectTool('ip-geo', 'IP Geolocation Lookup')">IP Geolocation Lookup</li>
+            <li class="tool-item" onclick="selectTool('subnet-calc', 'IPv4 Subnet Calculator')">IPv4 Subnet Calculator</li>
+            <li class="tool-item" onclick="selectTool('ip-blacklist', 'IP Blacklist Checker')">IP Blacklist Check</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">💻 Dev Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('json-format', 'JSON Formatter & Validator')">JSON Formatter</li>
+            <li class="tool-item" onclick="selectTool('base64', 'Base64 Encoder / Decoder')">Base64 Encoder/Decoder</li>
+            <li class="tool-item" onclick="selectTool('url-encode', 'URL Encoder / Decoder')">URL Encoder/Decoder</li>
+            <li class="tool-item" onclick="selectTool('html-entity', 'HTML Entities Encoder')">HTML Entity Converter</li>
+            <li class="tool-item" onclick="selectTool('regex-tester', 'Regex Tester & Debugger')">Regex Tester</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">🎨 Designer Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('color-converter', 'HEX to RGB / HSL Converter')">Color Code Converter</li>
+            <li class="tool-item" onclick="selectTool('px-to-rem', 'PX to REM Converter')">PX to REM / EM</li>
+            <li class="tool-item" onclick="selectTool('svg-encoder', 'SVG Data URI Encoder')">SVG Data URI Encoder</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">🚀 Webmasters Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('robots-gen', 'Robots.txt Generator')">Robots.txt Generator</li>
+            <li class="tool-item" onclick="selectTool('sitemap-gen', 'XML Sitemap Generator')">XML Sitemap Generator</li>
+            <li class="tool-item" onclick="selectTool('meta-tags', 'Meta Tags Analyzer')">Meta Tags Generator/Analyzer</li>
+            <li class="tool-item" onclick="selectTool('redirect-checker', '301 Redirect Checker')">HTTP Redirect Checker</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">🔌 Network Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('ping-test', 'Online Ping Tool')">Online Ping Tool</li>
+            <li class="tool-item" onclick="selectTool('port-scanner', 'Open Port Scanner')">Open Port Checker</li>
+            <li class="tool-item" onclick="selectTool('traceroute', 'Traceroute Online')">Traceroute Online</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">🛡️ Cyber Security Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('pass-gen', 'Strong Password Generator')">Password Generator</li>
+            <li class="tool-item" onclick="selectTool('hash-gen', 'MD5 / SHA256 Generator')">Hash Generator (MD5/SHA)</li>
+            <li class="tool-item" onclick="selectTool('headers-check', 'HTTP Security Headers Check')">Security Headers Check</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">⚡ Productivity Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('word-counter', 'Word & Character Counter')">Word Counter</li>
+            <li class="tool-item" onclick="selectTool('case-converter', 'Text Case Converter')">Text Case Converter</li>
+            <li class="tool-item" onclick="selectTool('diff-checker', 'Text Difference Checker')">Diff Checker</li>
+          </ul>
+        </div>
+
+        <div class="category-group">
+          <div class="category-title">🎮 Gaming Tools</div>
+          <ul class="tool-list">
+            <li class="tool-item" onclick="selectTool('cps-test', 'CPS (Click Per Second) Test')">CPS Test Engine</li>
+            <li class="tool-item" onclick="selectTool('ping-game', 'Game Server Latency Check')">Game Ping Tester</li>
+          </ul>
+        </div>
+
+      </aside>
+
+      <!-- Right Interactive Converter / Engine Area -->
+      <main class="converter-card">
+        <div class="active-tool-header">
+          <h2 class="active-tool-title" id="activeToolName">DNS Lookup / Propagation Check</h2>
+          <span style="font-size: 0.85rem; background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 10px; border-radius: 20px;" id="toolCategoryBadge">DNS Tools</span>
+        </div>
+
+        <div class="io-container">
+          <div class="io-box">
+            <label id="inputLabel">Domain / Data Input:</label>
+            <textarea id="inputText" placeholder="Enter domain or data here... (Example: google.com)"></textarea>
+          </div>
+          <div class="io-box">
+            <label id="outputLabel">Execution Result / Preview:</label>
+            <textarea id="outputText" readonly placeholder="Results will appear automatically or after clicking the process button..."></textarea>
+          </div>
+        </div>
+
+        <div class="color-preview-bar" id="colorPreviewBar" style="display: none;">
+          <span id="colorPreviewLabel">Color Preview:</span> <span id="colorHexCode" style="margin-left: 5px;">#3B82F6</span>
+        </div>
+
+        <div class="action-row" style="margin-top: 20px;">
+          <button class="btn btn-action" id="btnProcess" onclick="processTool()">Run / Process</button>
+          <button class="btn btn-secondary" id="btnClear" onclick="clearFields()">Clear Input</button>
+          <button class="btn btn-secondary" id="btnCopy" onclick="copyOutput()">Copy Result</button>
+        </div>
+      </main>
+
+    </div>
+
+    <!-- AdSense Middle Responsive Unit -->
+    <div style="margin: 30px 0; text-align: center;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5407249785989200"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- SEO Comprehensive Article Section (Default: English) -->
+    <article id="articleContent">
+      <h1>Complete Guide to the Online Tool Ecosystem (All Online Tools by DNS Checker): Mastering DNS, IP, Developer, Designer, Network, Cyber Security, Productivity, and Gaming Tools</h1>
+
+      <p>
+        In the modern era of digital infrastructure management, webmasters, software engineers, system administrators, application developers, and cybersecurity practitioners require fast, precise, and reliable tools. This comprehensive guide details nine major categories of digital online tools provided by DNS Checker and similar web platforms.
+      </p>
+
+      <h2>1. DNS Tools: Ensuring Flawless Domain Navigation and Resolution</h2>
+      <p>
+        The Domain Name System (DNS) is the most critical foundation of the World Wide Web. Without DNS, users would have to navigate the internet by remembering complex combinations of IP address numbers. The suite of <strong>DNS Tools</strong> helps professionals diagnose, verify, and repair domain name mapping configurations.
+      </p>
+
+      <h3>DNS Propagation Checker & Lookup</h3>
+      <p>
+        When you update nameservers or change a domain's A Record, the changes do not take effect globally instantly. This process is known as <strong>DNS propagation</strong>. A DNS Propagation Checker queries multiple public resolver servers distributed across Asia, America, Europe, and Africa to test whether your domain points to the new server IP.
+      </p>
+      <ul>
+        <li><strong>A Record:</strong> Maps a domain name to an IPv4 address (e.g., <code>192.0.2.1</code>).</li>
+        <li><strong>AAAA Record:</strong> Maps a domain name to a modern IPv6 address (e.g., <code>2001:db8::1</code>).</li>
+        <li><strong>CNAME Record:</strong> Creates an alias from one domain name to another.</li>
+      </ul>
+
+      <h3>MX (Mail Exchange) & TXT Record Tools</h3>
+      <p>
+        Corporate email services require precise MX record integration. An MX Record routes emails sent to your domain to the receiving email server (such as Google Workspace, Microsoft Outlook, or cPanel Mail Server). Misconfigurations can cause emails to bounce back. Meanwhile, <strong>TXT records</strong> are essential for verifying domain ownership (Google Search Console, SSL Validation) and implementing security protocols like <strong>SPF (Sender Policy Framework)</strong> and <strong>DKIM</strong> to prevent email spoofing.
+      </p>
+
+      ---
+
+      <h2>2. IP Tools: Network Identity and Routing Management</h2>
+      <p>
+        Every device connected to a public or private network must have a unique identifier called an IP Address. The <strong>IP Tools</strong> category allows users to analyze logical positions, subnet coverage, and global IP reputation status.
+      </p>
+
+      <h3>What is My IP & IP Geolocation Lookup</h3>
+      <p>
+        The "What is My IP" tool instantly detects the public IP provided by your Internet Service Provider (ISP). Additionally, IP Geolocation provides details such as estimated geographic coordinates, city, country, postal code, and Autonomous System Number (ASN).
+      </p>
+
+      <h3>IPv4 Subnet Calculator</h3>
+      <p>
+        For Network Administrators, dividing networks into efficient segments is a routine task. A <strong>Subnet Calculator</strong> calculates IP address range allocations, Subnet Masks (Netmask), Wildcard Masks, Network Addresses, Broadcast Addresses, and total usable hosts based on Classless Inter-Domain Routing (CIDR) notation like <code>/24</code>, <code>/27</code>, or <code>/16</code>.
+      </p>
+
+      <h3>IP Blacklist Checker</h3>
+      <p>
+        If your web server or email server suddenly becomes inaccessible or outbound emails end up in spam folders, your server IP might be blacklisted on global DNSBL/RBL databases (such as Spamhaus, Barracuda, or Sorbs). The IP Blacklist Checker scans dozens of real-time databases.
+      </p>
+
+      ---
+
+      <h2>3. Dev Tools: Efficient App Development & Data Processing</h2>
+      <p>
+        Developers require utilities for data manipulation, schema conversion, formatting, and debugging without launching heavy terminals or writing custom scripts.
+      </p>
+
+      <h3>JSON Formatter & Validator</h3>
+      <p>
+        JSON (JavaScript Object Notation) is the *de facto* standard for modern API data exchange. However, minified JSON data is difficult to read. A JSON Formatter organizes structure with proper indentation (*pretty print*) while validating syntax errors such as missing brackets or trailing commas.
+      </p>
+
+      <h3>Base64 & URL Encoder / Decoder</h3>
+      <p>
+        <strong>Base64 Encoding</strong> translates binary data or plain text into universal ASCII characters. This is useful for embedding small images into CSS/HTML or securely transmitting token data. Conversely, a <strong>URL Encoder</strong> converts special characters (like spaces or symbols) into percent-encoding (e.g., <code>%20</code>) so they can pass safely through browser query strings.
+      </p>
+
+      <h3>Regex Tester & Debugger</h3>
+      <p>
+        Regular Expressions (Regex) are powerful yet complex. A Regex Tester helps programmers test search patterns, character extractions, and form validations (email, passwords, phone numbers) instantly.
+      </p>
+
+      ---
+
+      <h2>4. Designer Tools: Visual Transformations, Colors, and CSS Scalability</h2>
+      <p>
+        Frontend Developers and UI/UX Designers need precise conversion tools to ensure visual interfaces adapt smoothly across different screens and design standards.
+      </p>
+
+      <h3>Color Code Converter (HEX, RGB, HSL)</h3>
+      <p>
+        Web color formats vary from Hexadecimal (<code>#3B82F6</code>) to RGB (<code>rgb(59, 130, 246)</code>) and HSL (<code>hsl(217, 91%, 60%)</code>). Color converters streamline transparency matching and precise format switching.
+      </p>
+
+      <h3>PX to REM / EM Converter</h3>
+      <p>
+        Modern responsive web design uses relative units like <strong>REM</strong> or <strong>EM</strong> instead of static pixels (PX). Assuming a browser default base size of <code>16px</code>, this converter transforms Figma/Adobe XD pixel values into ready-to-use CSS values.
+      </p>
+
+      <h3>SVG Data URI Encoder</h3>
+      <p>
+        Converting SVG vectors into Data URI formats allows them to be embedded directly into CSS <code>background-image</code> properties, reducing extra server HTTP requests and boosting Google PageSpeed Insights scores.
+      </p>
+
+      ---
+
+      <h2>5. Webmaster Tools: SEO Optimization and Site Structure</h2>
+      <p>
+        Managing websites requires technical SEO monitoring so search engine bots (Google, Bing, Yandex) can crawl and index content efficiently.
+      </p>
+
+      <h3>Robots.txt & XML Sitemap Generator</h3>
+      <p>
+        The <code>robots.txt</code> file acts as a traffic controller for search crawlers. It dictates which directories are allowed (<code>Allow</code>) or forbidden (<code>Disallow</code>). Meanwhile, an <strong>XML Sitemap Generator</strong> creates a structured map of site URLs ready for Google Search Console submission to speed up indexing.
+      </p>
+
+      <h3>HTTP Redirect & Status Code Checker</h3>
+      <p>
+        A redirect monitoring tool checks redirection chains (HTTP to HTTPS) and status codes like 301 (Permanent) and 302 (Temporary). Long redirect chains slow down page loading and waste SEO *crawl budget*.
+      </p>
+
+      ---
+
+      <h2>6. Network Tools: Connectivity Analysis & Latency Diagnostics</h2>
+      <p>
+        Reliable network infrastructures require real-time diagnostics to trace points of failure or bandwidth bottlenecks.
+      </p>
+
+      <h3>Online Ping & Port Scanner</h3>
+      <p>
+        The Ping tool sends ICMP Echo Requests to measure round-trip time (latency in milliseconds / ms) and packet loss. Meanwhile, a <strong>Port Scanner</strong> checks whether standard service ports such as Port 80 (HTTP), Port 443 (HTTPS), Port 22 (SSH), or Port 3306 (MySQL) are Open, Closed, or Filtered.
+      </p>
+
+      ---
+
+      <h2>7. Cyber Security Tools: Security Hardening & Basic Cryptography</h2>
+      <p>
+        Hacking threats and data breaches demand strict encryption and credential management standards from every system administrator.
+      </p>
+
+      <h3>Strong Password Generator & Hash Generator</h3>
+      <p>
+        Weak passwords are vulnerable to <em>Brute-Force</em> or <em>Dictionary Attacks</em>. A password generator creates randomized sequences blending uppercase, lowercase, numbers, and symbols. For data integrity verification, a <strong>Hash Generator</strong> produces unique checksum values using <strong>MD5</strong>, <strong>SHA-1</strong>, or <strong>SHA-256</strong> algorithms.
+      </p>
+
+      <h3>HTTP Security Headers Checker</h3>
+      <p>
+        This tool verifies security headers like <code>Strict-Transport-Security (HSTS)</code>, <code>Content-Security-Policy (CSP)</code>, <code>X-Frame-Options</code>, and <code>X-Content-Type-Options</code> to protect visitors from *Cross-Site Scripting (XSS)* and *Clickjacking* attacks.
+      </p>
+
+      ---
+
+      <h2>8. Productivity Tools: Text Manipulation & Fast Word Processing</h2>
+      <p>
+        Content creators, documentation writers, and editors need light utilities to format text, inspect document statistics, and compare revision differences.
+      </p>
+
+      <h3>Word & Character Counter</h3>
+      <p>
+        Counts total words, characters with/without spaces, paragraphs, and estimates reading time in real-time as you type.
+      </p>
+
+      <h3>Text Case Converter & Diff Checker</h3>
+      <p>
+        Convert text formats with a single click: <code>UPPERCASE</code>, <code>lowercase</code>, <code>Title Case</code>, <code>camelCase</code>, or <code>kebab-case</code>. The **Diff Checker** compares two blocks of text side-by-side to highlight added, deleted, or modified words.
+      </p>
+
+      ---
+
+      <h2>9. Gaming Tools: Input Responsiveness & Game Server Latency</h2>
+      <p>
+        Competitive gamers and hardware testers need tools to measure input performance statistics and network quality.
+      </p>
+
+      <h3>CPS (Click Per Second) Test Engine</h3>
+      <p>
+        The CPS Test measures mouse click speeds within set time intervals (1s, 5s, 10s). Useful for practicing *Jitter Clicking* or *Butterfly Clicking* techniques for competitive gaming.
+      </p>
+
+      <h3>Game Server Latency Check</h3>
+      <p>
+        Analyzes ping stability from your location to popular game servers (e.g., Valorant, League of Legends, CS:GO, Minecraft) to ensure smooth routing without jitter.
+      </p>
+
+      ---
+
+      <h2>Conclusion Summary</h2>
+      <p>
+        The online tool ecosystem provided by <strong>DNS Checker</strong> and integrated toolboxes is built to streamline routine technical tasks. Whether you are a beginner learning network fundamentals or a senior engineer managing dozens of server clusters, these tools provide instant, secure, and efficient diagnostics from anywhere.
+      </p>
+    </article>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 AWDev Online Tools Engine & DNS Checker Ecosystem. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Interactive JavaScript Logic Engine & Multi-Language Dictionary -->
+  <script>
+    let currentToolId = 'dns-lookup';
+
+    // Articles Content Dictionary
+    const articlesDict = {
+      en: `
+        <h1>Complete Guide to the Online Tool Ecosystem (All Online Tools by DNS Checker): Mastering DNS, IP, Developer, Designer, Network, Cyber Security, Productivity, and Gaming Tools</h1>
+        <p>In the modern era of digital infrastructure management, webmasters, software engineers, system administrators, application developers, and cybersecurity practitioners require fast, precise, and reliable tools. This comprehensive guide details nine major categories of digital online tools provided by DNS Checker and similar web platforms.</p>
+        <h2>1. DNS Tools: Ensuring Flawless Domain Navigation and Resolution</h2>
+        <p>The Domain Name System (DNS) is the most critical foundation of the World Wide Web. Without DNS, users would have to navigate the internet by remembering complex combinations of IP address numbers. The suite of <strong>DNS Tools</strong> helps professionals diagnose, verify, and repair domain name mapping configurations.</p>
+        <h3>DNS Propagation Checker & Lookup</h3>
+        <p>When you update nameservers or change a domain's A Record, changes do not take effect globally instantly. This process is known as <strong>DNS propagation</strong>. A DNS Propagation Checker queries multiple public resolver servers distributed across Asia, America, Europe, and Africa to test whether your domain points to the new server IP.</p>
+        <ul>
+          <li><strong>A Record:</strong> Maps a domain name to an IPv4 address (e.g., <code>192.0.2.1</code>).</li>
+          <li><strong>AAAA Record:</strong> Maps a domain name to a modern IPv6 address (e.g., <code>2001:db8::1</code>).</li>
+          <li><strong>CNAME Record:</strong> Creates an alias from one domain name to another.</li>
+        </ul>
+        <h3>MX & TXT Record Tools</h3>
+        <p>Corporate email services require precise MX record integration. MX Records route emails to receiving servers. <strong>TXT records</strong> are essential for verifying domain ownership and setting up security protocols like <strong>SPF</strong> and <strong>DKIM</strong>.</p>
+        <hr>
+        <h2>2. IP Tools: Network Identity and Routing Management</h2>
+        <p>Every device connected to a network needs an IP Address. IP Tools allow users to analyze logical positions, subnet coverage, and global IP reputation status.</p>
+        <h3>Subnet Calculator & Blacklist Checker</h3>
+        <p>Calculates IP address ranges, Netmasks, and total usable hosts based on CIDR notation. Blacklist checkers scan DNSBL/RBL databases to verify if your IP is flagged for spam.</p>
+        <hr>
+        <h2>3. Dev & Designer Tools</h2>
+        <p>Utilities for JSON formatting, Base64/URL encoding, Regex testing, Color conversions (HEX/RGB/HSL), and PX to REM conversions to build responsive web apps smoothly.</p>
+        <hr>
+        <h2>4. Webmasters, Network, Security & Gaming Tools</h2>
+        <p>Generate Robots.txt & XML Sitemaps, check HTTP Redirects, perform Ping & Port scanning, generate strong passwords/hashes, check security headers, and test CPS (Clicks Per Second) or game server ping.</p>
+      `,
+      id: `
+        <h1>Panduan Lengkap Ekosistem Alat Online (All Online Tools by DNS Checker): Menguasai DNS, IP, Developer, Designer, Network, Cyber Security, Productivity, dan Gaming Tools</h1>
+        <p>Di era modern pengelolaan infrastruktur digital, webmaster, software engineer, sistem administrator, pengembang aplikasi, dan praktisi keamanan siber memerlukan alat kerja yang cepat, presisi, dan andal. Panduan ini mengulas secara terperinci sembilan kategori utama perkakas digital (*online tools*) yang disediakan oleh DNS Checker.</p>
+        <h2>1. DNS Tools: Menjamin Navigasi dan Resolusi Domain yang Sempurna</h2>
+        <p>Domain Name System (DNS) adalah fondasi paling krusial dari World Wide Web. Tanpa DNS, pengguna harus mengoperasikan internet dengan mengingat kombinasi deretan angka IP address yang rumit. Kumpulan <strong>DNS Tools</strong> membantu profesional mendiagnosis, memverifikasi, dan memperbaiki konfigurasi pemetaan nama domain.</p>
+        <h3>DNS Propagation Checker & Lookup</h3>
+        <p>Ketika Anda memperbarui nama server (*nameservers*) atau mengubah A Record sebuah domain, perubahan tersebut tidak langsung berdampak di seluruh dunia secara instan. Proses ini dikenal sebagai <strong>propagasi DNS</strong>.</p>
+        <ul>
+          <li><strong>A Record:</strong> Memetakan nama domain ke alamat IPv4 (contoh: <code>192.0.2.1</code>).</li>
+          <li><strong>AAAA Record:</strong> Memetakan nama domain ke alamat IPv6 modern (contoh: <code>2001:db8::1</code>).</li>
+          <li><strong>CNAME Record:</strong> Membuat alias dari satu nama domain ke nama domain lainnya.</li>
+        </ul>
+        <h3>MX & TXT Record Tools</h3>
+        <p>Layanan email korporat memerlukan integrasi catatan MX yang presisi. Sementara itu, catatan <strong>TXT</strong> berperan penting memasang verifikasi kepemilikan domain serta protokol keamanan email seperti <strong>SPF</strong> dan <strong>DKIM</strong>.</p>
+        <hr>
+        <h2>2. IP Tools: Manajemen Identitas Jaringan dan Routing</h2>
+        <p>Setiap perangkat yang terhubung ke jaringan harus memiliki identitas unik bernama IP Address. Kategori IP Tools memungkinkan pengguna menganalisis posisi logis, cakupan subnet, serta status reputasi IP.</p>
+        <hr>
+        <h2>3. Perkakas Dev, Designer, Keamanan & Game</h2>
+        <p>Dilengkapi dengan pengolah JSON, Base64, penguji Regex, konverter warna, generator Robots.txt, pemindai Port, penguji Ping game, serta generator sandi kuat.</p>
+      `,
+      es: `
+        <h1>Guía Completa del Ecosistema de Herramientas en Línea (All Online Tools by DNS Checker): Dominando DNS, IP, Desarrolladores, Diseñadores, Redes y Seguridad</h1>
+        <p>En la era moderna de la gestión de infraestructura digital, los administradores web, ingenieros de software y profesionales de ciberseguridad requieren herramientas rápidas y precisas. Esta guía detalla las principales categorías de herramientas digitales proporcionadas por DNS Checker.</p>
+        <h2>1. Herramientas DNS: Navegación y Resolución de Dominios</h2>
+        <p>El Sistema de Nombres de Dominio (DNS) es la base fundamental de la Web. Las <strong>Herramientas DNS</strong> ayudan a diagnosticar, verificar y reparar las configuraciones de asignación de nombres de dominio.</p>
+        <h3>Verificador de Propagación DNS</h3>
+        <p>Cuando actualiza los servidores de nombres o cambia un Registro A, los cambios no surten efecto de forma instantánea a nivel global. Este proceso se conoce como <strong>propagación DNS</strong>.</p>
+        <hr>
+        <h2>2. Herramientas IP, Desarrollo, Diseño y Redes</h2>
+        <p>Incluye calculadoras de subred IPv4, verificadores de listas negras, formateador JSON, codificador Base64, convertidor de color, generadores Robots.txt y pruebas de latencia.</p>
+      `,
+      fr: `
+        <h1>Guide Complet de l'Écosystème d'Outils en Ligne (All Online Tools by DNS Checker): Maîtriser le DNS, l'IP, le Développement et la Sécurité</h1>
+        <p>Dans l'ère moderne de la gestion des infrastructures numériques, les webmasters et ingénieurs réseau ont besoin d'outils rapides et fiables. Ce guide détaille les catégories d'outils en ligne fournies par DNS Checker.</p>
+        <h2>1. Outils DNS: Gestion des Noms de Domaine</h2>
+        <p>Le système de noms de domaine (DNS) est le composant le plus essentiel du Web. Les <strong>Outils DNS</strong> permettent de diagnostiquer et vérifier les configurations de domaine.</p>
+        <h3>Vérificateur de Propagation DNS</h3>
+        <p>Lors de la modification des serveurs DNS ou des enregistrements A, la mise à jour globale prend du temps. Ce processus s'appelle la <strong>propagation DNS</strong>.</p>
+        <hr>
+        <h2>2. Outils IP, Développeurs, Design et Réseau</h2>
+        <p>Propose un calculateur de sous-réseau IPv4, un vérificateur de liste noire, un formateur JSON, des convertisseurs de couleur et un testeur de latence.</p>
+      `
+    };
+
+    // Interface Translations Dictionary
+    const uiTranslations = {
+      en: {
+        subtitle: "The Most Complete Ecosystem for Server, DNS, Network, Cyber Security, Dev, Designer & Productivity Tools",
+        searchPlaceholder: "🔍 Search online tools (e.g., DNS Lookup, Base64, Subnet, Ping, Password Generator)...",
+        inputLabel: "Domain / Data Input:",
+        outputLabel: "Execution Result / Preview:",
+        inputPlaceholder: "Enter domain or data here... (Example: google.com)",
+        outputPlaceholder: "Results will appear automatically or after clicking the process button...",
+        colorLabel: "Color Preview:",
+        btnProcess: "Run / Process",
+        btnClear: "Clear Input",
+        btnCopy: "Copy Result"
+      },
+      id: {
+        subtitle: "Ekosistem Peralatan Server, DNS, Network, Cyber Security, Dev, Designer & Productivity Terlengkap",
+        searchPlaceholder: "🔍 Cari alat online (contoh: DNS Lookup, Base64, Subnet, Ping, Password Generator)...",
+        inputLabel: "Input Domain / Data:",
+        outputLabel: "Hasil Eksekusi / Preview:",
+        inputPlaceholder: "Masukkan domain atau data di sini... (Contoh: google.com)",
+        outputPlaceholder: "Hasil akan muncul secara otomatis atau setelah mengeklik tombol proses...",
+        colorLabel: "Preview Warna:",
+        btnProcess: "Jalankan / Process",
+        btnClear: "Bersihkan Input",
+        btnCopy: "Salin Hasil"
+      },
+      es: {
+        subtitle: "El ecosistema más completo de herramientas para Servidores, DNS, Redes, Ciberseguridad y Desarrollo",
+        searchPlaceholder: "🔍 Buscar herramientas en línea (ej. DNS Lookup, Base64, Subred, Ping)...",
+        inputLabel: "Entrada de Dominio / Datos:",
+        outputLabel: "Resultado de Ejecución / Vista Previa:",
+        inputPlaceholder: "Ingrese el dominio o los datos aquí... (Ejemplo: google.com)",
+        outputPlaceholder: "Los resultados aparecerán automáticamente o al hacer clic en procesar...",
+        colorLabel: "Vista Previa de Color:",
+        btnProcess: "Ejecutar / Procesar",
+        btnClear: "Limpiar Entrada",
+        btnCopy: "Copiar Resultado"
+      },
+      fr: {
+        subtitle: "L'écosystème le plus complet d'outils pour Serveur, DNS, Réseau, Cybersécurité et Développement",
+        searchPlaceholder: "🔍 Rechercher des outils en ligne (ex: DNS Lookup, Base64, Sous-réseau, Ping)...",
+        inputLabel: "Entrée Domaine / Données:",
+        outputLabel: "Résultat / Aperçu:",
+        inputPlaceholder: "Entrez le domaine ou les données ici... (Exemple: google.com)",
+        outputPlaceholder: "Les résultats s'afficheront automatiquement après traitement...",
+        colorLabel: "Aperçu de la Couleur:",
+        btnProcess: "Exécuter / Traiter",
+        btnClear: "Effacer L'Entrée",
+        btnCopy: "Copier le Résultat"
+      }
+    };
+
+    // Switch Language Function
+    function switchLanguage(lang) {
+      // Update HTML lang tag
+      document.documentElement.lang = lang;
+
+      // Update Active Button UI
+      const langBtns = document.querySelectorAll('.lang-btn');
+      langBtns.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Update Article Content
+      if (articlesDict[lang]) {
+        document.getElementById('articleContent').innerHTML = articlesDict[lang];
+      }
+
+      // Update UI Strings
+      const ui = uiTranslations[lang] || uiTranslations['en'];
+      document.getElementById('headerSubtitle').innerText = ui.subtitle;
+      document.getElementById('toolSearch').placeholder = ui.searchPlaceholder;
+      document.getElementById('inputLabel').innerText = ui.inputLabel;
+      document.getElementById('outputLabel').innerText = ui.outputLabel;
+      document.getElementById('inputText').placeholder = ui.inputPlaceholder;
+      document.getElementById('outputText').placeholder = ui.outputPlaceholder;
+      document.getElementById('colorPreviewLabel').innerText = ui.colorLabel;
+      document.getElementById('btnProcess').innerText = ui.btnProcess;
+      document.getElementById('btnClear').innerText = ui.btnClear;
+      document.getElementById('btnCopy').innerText = ui.btnCopy;
+    }
+
+    // Tool switching engine
+    function selectTool(id, name) {
+      currentToolId = id;
+      document.getElementById('activeToolName').innerText = name;
+      
+      // Highlight sidebar active item
+      const items = document.querySelectorAll('.tool-item');
+      items.forEach(item => item.classList.remove('active'));
+      if(event && event.target) {
+        event.target.classList.add('active');
+        const parentCategory = event.target.closest('.category-group').querySelector('.category-title').innerText;
+        document.getElementById('toolCategoryBadge').innerText = parentCategory;
+      }
+
+      // Reset IO display
+      document.getElementById('inputText').value = '';
+      document.getElementById('outputText').value = '';
+      document.getElementById('colorPreviewBar').style.display = 'none';
+    }
+
+    // Filter tools via search bar
+    function filterTools() {
+      const input = document.getElementById('toolSearch').value.toLowerCase();
+      const items = document.querySelectorAll('.tool-item');
+      
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        if (text.includes(input)) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    }
+
+    // Clear input & output fields
+    function clearFields() {
+      document.getElementById('inputText').value = '';
+      document.getElementById('outputText').value = '';
+      document.getElementById('colorPreviewBar').style.display = 'none';
+    }
+
+    // Copy Output Content
+    function copyOutput() {
+      const outputArea = document.getElementById('outputText');
+      if (outputArea.value) {
+        navigator.clipboard.writeText(outputArea.value);
+        alert('Result copied to clipboard!');
+      }
+    }
+
+    // Placeholder Process Action Engine
+    function processTool() {
+      const input = document.getElementById('inputText').value.trim();
+      const output = document.getElementById('outputText');
+
+      if (!input) {
+        output.value = "Please enter data to process.";
+        return;
+      }
+
+      if (currentToolId === 'color-converter') {
+        document.getElementById('colorPreviewBar').style.display = 'flex';
+        document.getElementById('colorPreviewBar').style.backgroundColor = input;
+        document.getElementById('colorHexCode').innerText = input.toUpperCase();
+        output.value = `RGB: rgb(59, 130, 246)\nHSL: hsl(217, 91%, 60%)`;
+      } else if (currentToolId === 'base64') {
+        output.value = btoa(input);
+      } else {
+        output.value = `[Simulated Execution Output for ${currentToolId.toUpperCase()}]\nTarget: ${input}\nStatus: Success\nTimestamp: ${new Date().toISOString()}`;
+      }
+    }
+  </script>
+</body>
+</html>
